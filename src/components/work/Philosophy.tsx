@@ -1,86 +1,141 @@
-const philosophies = [
+const approaches = [
   {
-    title: "AI is a tool, not a replacement.",
-    description: "I use AI to accelerate development, explore solutions faster, and automate tedious work. The creativity, architecture decisions, and problem-solving? That's still human.",
+    title: "ROI-First Thinking",
+    points: [
+      "Every project starts with impact analysis",
+      "Prioritize highest time-saving workflows",
+      "Measurable KPIs defined before building",
+      "Clear before/after cost comparison",
+    ],
   },
   {
-    title: "Automation creates leverage.",
-    description: "One hour building an automation can save hundreds of hours over time. I look for these multipliers in everything I build.",
+    title: "Bulletproof by Design",
+    featured: true,
+    points: [
+      "Edge cases handled from day one",
+      "Human-in-the-loop escalation built in",
+      "Error handling and fallback logic",
+      "24/7 monitoring and alerting",
+    ],
   },
   {
-    title: "Ship fast, learn faster.",
-    description: "The best way to validate an idea is to build it and put it in front of users. AI-powered development makes this possible at unprecedented speed.",
+    title: "Scale Without Limits",
+    points: [
+      "Handles 10x volume spikes gracefully",
+      "Modular architecture for easy expansion",
+      "No vendor lock-in on any platform",
+      "Future-proof tech stack choices",
+    ],
   },
 ];
 
-const approaches = [
+const philosophies = [
   {
-    title: "Speed Without Compromise",
-    description: "AI-assisted development doesn't mean lower quality—it means faster iteration, cleaner code through AI review, and more time focused on solving actual problems instead of syntax.",
+    quote: "If a human does it twice, a machine should do it forever.",
+    description:
+      "Repetitive tasks are a tax on your team's potential. I identify these patterns and replace them with intelligent automation that runs flawlessly.",
   },
   {
-    title: "Automation First",
-    description: "If a task is repetitive, it should be automated. I design systems that scale, reduce human error, and free up time for high-value work.",
+    quote: "AI should augment your business, not complicate it.",
+    description:
+      "No black-box solutions, no overcomplicated setups. Just clean systems that your team can understand, trust, and scale.",
   },
   {
-    title: "Build, Measure, Learn",
-    description: "Ship fast, gather feedback, iterate constantly. Every project is an opportunity to refine the process and improve outcomes.",
+    quote: "The best automation is the one you never have to think about.",
+    description:
+      "A well-built system runs silently in the background—answering calls, nurturing leads, syncing data. You only hear from it when it delivers results.",
   },
 ];
 
 export function Philosophy() {
   return (
-    <section className="py-32 px-6 md:px-16 lg:px-24 border-t border-white/5">
+    <section className="py-24 md:py-32 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
-        {/* Approach section */}
-        <div className="mb-32">
-          <h2 className="text-sm tracking-[0.3em] text-white/40 uppercase mb-4">
-            Approach
-          </h2>
-          <p className="text-2xl md:text-3xl font-light text-white/80 mb-16 max-w-2xl">
-            Principles that guide every project.
-          </p>
-          
-          <div className="grid md:grid-cols-3 gap-12">
+        {/* Approach section - pricing-style cards */}
+        <div className="mb-28">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-5xl font-semibold tracking-tight mb-6">
+              ROI-first automation
+            </h2>
+            <p className="text-lg text-white/50 leading-relaxed">
+              Every project is designed around measurable business impact.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
             {approaches.map((approach) => (
-              <div key={approach.title} className="group">
-                <h3 className="text-xl font-medium text-white mb-4 group-hover:text-blue-300 transition-colors">
+              <div
+                key={approach.title}
+                className={`relative p-8 border rounded-xl transition-all duration-300 ${
+                  approach.featured
+                    ? "border-[#FF4444]/40 bg-[#FF4444]/[0.04] hover:shadow-[0_0_40px_rgba(255,68,68,0.1)]"
+                    : "border-white/[0.08] bg-white/[0.02] hover:bg-white/[0.04]"
+                }`}
+              >
+                {approach.featured && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#FF4444] text-white text-[10px] font-semibold uppercase tracking-wider rounded-full">
+                    Recommended
+                  </div>
+                )}
+                <h3 className="text-xl font-semibold text-white mb-6">
                   {approach.title}
                 </h3>
-                <p className="text-white/50 leading-relaxed">
-                  {approach.description}
-                </p>
+                <ul className="space-y-3">
+                  {approach.points.map((point) => (
+                    <li
+                      key={point}
+                      className="flex items-start gap-3 text-sm text-white/50 leading-relaxed"
+                    >
+                      <svg
+                        className={`w-4 h-4 shrink-0 mt-0.5 ${
+                          approach.featured
+                            ? "text-[#FF4444]"
+                            : "text-white/30"
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M4.5 12.75l6 6 9-13.5"
+                        />
+                      </svg>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </div>
-        
-        {/* Philosophy section */}
+
+        {/* Philosophy quotes */}
         <div>
-          <h2 className="text-sm tracking-[0.3em] text-white/40 uppercase mb-4">
-            Philosophy
-          </h2>
-          <p className="text-2xl md:text-3xl font-light text-white/80 mb-16 max-w-2xl">
-            The beliefs behind the work.
-          </p>
-          
-          <div className="space-y-12">
-            {philosophies.map((item, index) => (
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-5xl font-semibold tracking-tight mb-6">
+              The beliefs behind the work
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {philosophies.map((item) => (
               <div
-                key={item.title}
-                className="grid md:grid-cols-[auto,1fr] gap-8 items-start group"
+                key={item.quote}
+                className="p-8 border border-white/[0.08] rounded-xl bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300"
               >
-                <span className="text-5xl font-extralight text-white/10 group-hover:text-blue-500/30 transition-colors">
-                  {String(index + 1).padStart(2, "0")}
+                {/* Oversized quotation mark */}
+                <span className="text-5xl font-serif text-[#FF4444]/30 leading-none block mb-4">
+                  &ldquo;
                 </span>
-                <div className="border-l border-white/10 pl-8">
-                  <h3 className="text-xl md:text-2xl font-light text-white mb-4 italic">
-                    &ldquo;{item.title}&rdquo;
-                  </h3>
-                  <p className="text-white/50 leading-relaxed max-w-2xl">
-                    {item.description}
-                  </p>
-                </div>
+                <p className="text-white/90 font-medium text-lg leading-snug mb-4 italic">
+                  {item.quote}
+                </p>
+                <p className="text-white/40 text-sm leading-relaxed">
+                  {item.description}
+                </p>
               </div>
             ))}
           </div>

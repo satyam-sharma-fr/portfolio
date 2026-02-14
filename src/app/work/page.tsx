@@ -4,14 +4,13 @@ import { Services } from "@/components/work/Services";
 import { Process } from "@/components/work/Process";
 import { Projects } from "@/components/work/Projects";
 import { Tools } from "@/components/work/Tools";
-import { Capabilities } from "@/components/work/Capabilities";
-import { Philosophy } from "@/components/work/Philosophy";
+import { WhyChoose } from "@/components/work/WhyChoose";
 import { WorkContact } from "@/components/work/WorkContact";
 import { SideNav } from "@/components/work/SideNav";
 
 export const metadata = {
-  title: "Work | Satyam",
-  description: "AI Automation Engineer - Building applications at the speed of thought using AI-powered tools and modern frameworks.",
+  title: "Work | Satyam — AI Automation Engineer",
+  description: "I build AI chatbots, voice agents, and workflow automations that run your business 24/7. From lead generation to customer support — intelligent systems that save time and scale.",
 };
 
 export default function WorkPage() {
@@ -24,8 +23,7 @@ export default function WorkPage() {
       <Process />
       <Projects />
       <Tools />
-      <Capabilities />
-      <Philosophy />
+      <WhyChoose />
       <WorkContact />
     </main>
   );

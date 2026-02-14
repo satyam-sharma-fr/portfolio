@@ -1,30 +1,61 @@
 export function Introduction() {
   return (
-    <section className="py-32 px-6 md:px-16 lg:px-24 border-t border-white/5">
-      <div className="max-w-4xl">
-        <h2 className="text-sm tracking-[0.3em] text-white/40 uppercase mb-8">
-          Introduction
-        </h2>
-        
-        <h3 className="text-3xl md:text-4xl font-light tracking-tight mb-8">
-          Building Different
-        </h3>
-        
-        <div className="space-y-6 text-white/60 text-lg leading-relaxed">
-          <p>
-            Traditional development is too slow. I leverage AI assistants like Claude and Cursor to accelerate every phase—from ideation to deployment. This isn&apos;t about replacing skill; it&apos;s about amplifying capability.
-          </p>
-          
-          <p>
-            I specialize in automation engineering: creating systems that work while you sleep, workflows that eliminate repetitive tasks, and applications that solve real problems fast.
+    <section className="py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-white/[0.02]">
+      <div className="max-w-6xl mx-auto">
+        {/* Centered heading block */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight mb-6">
+            AI automation that works for{" "}
+            <span className="text-white">your business,</span>
+            <br />
+            not the other way around
+          </h2>
+          <p className="text-lg text-white/50 leading-relaxed">
+            Every hour your team spends on manual tasks is an hour lost. I build
+            AI-powered systems that take over the repetitive work&mdash;intelligently,
+            reliably, 24/7.
           </p>
         </div>
-        
-        <div className="mt-12 pt-8 border-t border-white/10">
-          <p className="text-sm text-white/40 uppercase tracking-[0.2em] mb-3">Current Focus</p>
-          <p className="text-white/80">
-            AI-assisted full-stack development, workflow automation, and rapid prototyping.
-          </p>
+
+        {/* Stat cards row - like CF's Run everywhere / Run anywhere / Run at massive scale */}
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="p-8 border border-white/[0.08] rounded-lg bg-white/[0.02]">
+            <div className="w-2 h-2 rounded-full bg-[#FF4444] mb-5" />
+            <h3 className="text-lg font-semibold text-white mb-3">
+              AI Agents &amp; Chatbots
+            </h3>
+            <p className="text-white/50 text-sm leading-relaxed">
+              Custom AI chatbots trained on your data using RAG, voice agents
+              that book appointments, and autonomous agents that research,
+              decide, and execute.
+            </p>
+          </div>
+
+          <div className="p-8 border border-white/[0.08] rounded-lg bg-white/[0.02]">
+            <div className="w-2 h-2 rounded-full bg-[#FF4444] mb-5" />
+            <h3 className="text-lg font-semibold text-white mb-3">
+              Workflow Automation
+            </h3>
+            <p className="text-white/50 text-sm leading-relaxed">
+              End-to-end business process automation using n8n, Make, and Zapier.
+              Connect your CRM, email, Slack, and{" "}
+              <span className="text-white font-medium">5,000+ apps</span> into
+              seamless pipelines.
+            </p>
+          </div>
+
+          <div className="p-8 border border-white/[0.08] rounded-lg bg-white/[0.02]">
+            <div className="w-2 h-2 rounded-full bg-[#FF4444] mb-5" />
+            <h3 className="text-lg font-semibold text-white mb-3">
+              Full-Stack AI Systems
+            </h3>
+            <p className="text-white/50 text-sm leading-relaxed">
+              Built on OpenAI, Claude, LangChain, and custom APIs. Deployed on
+              modern infra with{" "}
+              <span className="text-white font-medium">24/7 uptime</span> and
+              real-time monitoring.
+            </p>
+          </div>
         </div>
       </div>
     </section>

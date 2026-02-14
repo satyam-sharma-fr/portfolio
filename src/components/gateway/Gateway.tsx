@@ -2,13 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Entropy } from "@/components/ui/entropy";
 
 function LurkingPhoto({ hoveredSide }: { hoveredSide: "personal" | "work" | null }) {
-  // Set to true once you add your PNG cutouts to /public/images/
-  const hasPhotos = false;
-
   return (
     <>
       {/* Personal photo - lurks from LEFT */}
@@ -26,33 +22,56 @@ function LurkingPhoto({ hoveredSide }: { hoveredSide: "personal" | "work" | null
             clipPath: "polygon(0 0, 85% 0, 100% 100%, 0 100%)",
           }}
         >
-          {hasPhotos ? (
-            <Image
-              src="/images/cutout-casual.png"
-              alt="Satyam - casual"
-              fill
-              className="object-contain object-left-bottom"
-              priority
-            />
-          ) : (
-            /* Placeholder */
-            <div className="absolute inset-0 flex items-end justify-center pb-20">
-              <div
-                className={`transition-all duration-500 ${
-                  hoveredSide === "personal" ? "opacity-100 scale-100" : "opacity-40 scale-95"
-                }`}
-              >
-                <div className="relative">
-                  {/* Silhouette placeholder */}
-                  <div className="w-64 h-96 bg-gradient-to-t from-[#FF6B35]/30 via-[#F7C59F]/20 to-transparent rounded-t-full" />
-                  <div className="absolute bottom-20 left-1/2 -translate-x-1/2 text-8xl">
-                    😊
-                  </div>
-                  <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-white/30 whitespace-nowrap">
-                    Add cutout-casual.png
-                  </p>
-                </div>
-              </div>
+          <div className="absolute inset-0 flex items-end justify-start">
+            <div
+              className={`transition-all duration-500 ${
+                hoveredSide === "personal" ? "opacity-100 scale-100" : "opacity-40 scale-95"
+              }`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/satyam-casual.png"
+                alt="Satyam - personal"
+                className="w-auto h-[102vh] max-w-none object-contain object-left-bottom select-none"
+                style={{
+                  maskImage:
+                    "linear-gradient(to bottom, transparent 0%, black 15%, black 60%, transparent 95%)",
+                  WebkitMaskImage:
+                    "linear-gradient(to bottom, transparent 0%, black 15%, black 60%, transparent 95%)",
+                  filter: hoveredSide === "personal"
+                    ? "sepia(0.3) saturate(1.2) hue-rotate(-10deg) brightness(0.9)"
+                    : "brightness(0.5) grayscale(0.5)",
+                  transition: "filter 0.5s ease",
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Animated edge trace line - only rendered on hover so animation replays */}
+          {hoveredSide === "personal" && (
+            <div
+              className="absolute inset-0 flex items-end justify-start pointer-events-none"
+              style={{
+                filter:
+                  "drop-shadow(0 0 2px #FF6B35) drop-shadow(0 0 4px #FF6B35) drop-shadow(0 0 8px rgba(255,107,53,0.5))",
+                mixBlendMode: "lighten",
+                animation: "edge-trace-personal 1.8s ease-in-out 0.4s both",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/satyam-casual.png"
+                alt=""
+                aria-hidden="true"
+                className="w-auto h-[102vh] max-w-none object-contain object-left-bottom select-none"
+                style={{
+                  filter: "brightness(0)",
+                  maskImage:
+                    "linear-gradient(to bottom, transparent 0%, black 15%, black 60%, transparent 95%)",
+                  WebkitMaskImage:
+                    "linear-gradient(to bottom, transparent 0%, black 15%, black 60%, transparent 95%)",
+                }}
+              />
             </div>
           )}
         </div>
@@ -80,33 +99,56 @@ function LurkingPhoto({ hoveredSide }: { hoveredSide: "personal" | "work" | null
             clipPath: "polygon(15% 0, 100% 0, 100% 100%, 0 100%)",
           }}
         >
-          {hasPhotos ? (
-            <Image
-              src="/images/cutout-professional.png"
-              alt="Satyam - professional"
-              fill
-              className="object-contain object-right-bottom"
-              priority
-            />
-          ) : (
-            /* Placeholder */
-            <div className="absolute inset-0 flex items-end justify-center pb-20">
-              <div
-                className={`transition-all duration-500 ${
-                  hoveredSide === "work" ? "opacity-100 scale-100" : "opacity-40 scale-95"
-                }`}
-              >
-                <div className="relative">
-                  {/* Silhouette placeholder */}
-                  <div className="w-64 h-96 bg-gradient-to-t from-[#64C8FF]/30 via-[#3B82F6]/20 to-transparent rounded-t-full" />
-                  <div className="absolute bottom-20 left-1/2 -translate-x-1/2 text-8xl">
-                    💼
-                  </div>
-                  <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-white/30 whitespace-nowrap">
-                    Add cutout-professional.png
-                  </p>
-                </div>
-              </div>
+          <div className="absolute inset-0 flex items-end justify-end">
+            <div
+              className={`transition-all duration-500 ${
+                hoveredSide === "work" ? "opacity-100 scale-100" : "opacity-40 scale-95"
+              }`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/satyam.png"
+                alt="Satyam - professional"
+                className="w-auto h-[102vh] max-w-none object-contain object-right-bottom select-none"
+                style={{
+                  maskImage:
+                    "linear-gradient(to bottom, transparent 0%, black 15%, black 60%, transparent 95%)",
+                  WebkitMaskImage:
+                    "linear-gradient(to bottom, transparent 0%, black 15%, black 60%, transparent 95%)",
+                  filter: hoveredSide === "work"
+                    ? "saturate(0.8) brightness(1) hue-rotate(10deg)"
+                    : "brightness(0.5) grayscale(0.5)",
+                  transition: "filter 0.5s ease",
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Animated edge trace line - only rendered on hover so animation replays */}
+          {hoveredSide === "work" && (
+            <div
+              className="absolute inset-0 flex items-end justify-end pointer-events-none"
+              style={{
+                filter:
+                  "drop-shadow(0 0 2px #64C8FF) drop-shadow(0 0 4px #64C8FF) drop-shadow(0 0 8px rgba(100,200,255,0.5))",
+                mixBlendMode: "lighten",
+                animation: "edge-trace-work 1.8s ease-in-out 0.4s both",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/satyam.png"
+                alt=""
+                aria-hidden="true"
+                className="w-auto h-[102vh] max-w-none object-contain object-right-bottom select-none"
+                style={{
+                  filter: "brightness(0)",
+                  maskImage:
+                    "linear-gradient(to bottom, transparent 0%, black 15%, black 60%, transparent 95%)",
+                  WebkitMaskImage:
+                    "linear-gradient(to bottom, transparent 0%, black 15%, black 60%, transparent 95%)",
+                }}
+              />
             </div>
           )}
         </div>
@@ -186,7 +228,7 @@ export function Gateway() {
         {/* Personal Side - LEFT 45% */}
         <Link
           href="/me"
-          className="md:w-[45%] flex-1 md:flex-none flex items-end md:items-center justify-start p-8 md:p-12 group cursor-pointer"
+          className="md:w-[45%] flex-1 md:flex-none flex items-end md:items-end justify-start p-8 md:p-12 md:pb-24 group cursor-pointer"
           onMouseEnter={() => setHoveredSide("personal")}
           onMouseLeave={() => setHoveredSide(null)}
         >
@@ -240,7 +282,7 @@ export function Gateway() {
         {/* Work Side - RIGHT 45% */}
         <Link
           href="/work"
-          className="md:w-[45%] flex-1 md:flex-none flex items-start md:items-center justify-end p-8 md:p-12 group cursor-pointer"
+          className="md:w-[45%] flex-1 md:flex-none flex items-start md:items-end justify-end p-8 md:p-12 md:pb-24 group cursor-pointer"
           onMouseEnter={() => setHoveredSide("work")}
           onMouseLeave={() => setHoveredSide(null)}
         >

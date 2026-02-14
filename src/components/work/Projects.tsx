@@ -1,102 +1,105 @@
 const projects = [
   {
-    title: "[Project Name 1]",
-    subtitle: "Automated Content Pipeline",
-    description: "Built an end-to-end system that transforms raw data into formatted content using AI, reducing manual processing time by 85%.",
-    stack: ["Next.js", "OpenAI API", "PostgreSQL", "Vercel"],
-    impact: "20+ hours saved weekly",
+    title: "AI Customer Support Agent",
+    subtitle: "RAG-Powered Chatbot for E-Commerce",
+    description:
+      "Built a custom AI chatbot trained on 500+ product pages and support docs using RAG. Handles order tracking, returns, sizing questions, and escalates complex issues to human agents.",
+    stack: ["OpenAI", "Pinecone", "n8n", "Next.js", "WhatsApp API"],
+    impact: "70% reduction in support tickets",
+    stat: "70%",
+    statLabel: "fewer tickets",
   },
   {
-    title: "[Project Name 2]",
-    subtitle: "Business Workflow Automation",
-    description: "Created custom automation connecting 5+ tools to eliminate manual data entry and notification management.",
-    stack: ["n8n", "Airtable", "Slack API", "Webhooks"],
-    impact: "Eliminated 15 hours of weekly manual work",
+    title: "AI Voice Receptionist",
+    subtitle: "Automated Appointment Booking System",
+    description:
+      "AI voice agent for a clinic that answers phone calls, understands patient requests, checks calendar availability, books appointments, and sends confirmation SMS.",
+    stack: ["Voiceflow", "Twilio", "Google Calendar", "Make", "Airtable"],
+    impact: "40+ hours saved monthly",
+    stat: "40+",
+    statLabel: "hours saved/mo",
   },
   {
-    title: "[Project Name 3]",
-    subtitle: "AI-Powered Dashboard",
-    description: "Rapid prototype for data visualization and reporting, built in 48 hours using AI-assisted development.",
-    stack: ["React", "TypeScript", "Recharts", "Tailwind"],
-    impact: "Validated product concept before major investment",
+    title: "Lead Gen Autopilot",
+    subtitle: "End-to-End Sales Pipeline Automation",
+    description:
+      "Fully automated lead generation system that scrapes prospects, enriches data with AI, scores leads, and triggers personalized email outreach sequences.",
+    stack: ["n8n", "Clay", "OpenAI", "Instantly", "Google Sheets"],
+    impact: "3x increase in qualified leads",
+    stat: "3x",
+    statLabel: "more leads",
+  },
+  {
+    title: "Multi-App Business Workflow",
+    subtitle: "CRM + Email + Slack Automation Hub",
+    description:
+      "Centralized automation hub connecting HubSpot, Gmail, Slack, Notion, and Stripe. New deals auto-create projects, channels, and email sequences—zero manual entry.",
+    stack: ["Zapier", "HubSpot API", "Slack API", "Notion API", "Stripe"],
+    impact: "20+ hours of weekly work eliminated",
+    stat: "20+",
+    statLabel: "hrs saved/week",
   },
 ];
 
 export function Projects() {
   return (
-    <section id="projects" className="py-32 px-6 md:px-16 lg:px-24 bg-white/[0.02]">
+    <section
+      id="projects"
+      className="py-24 md:py-32 px-6 md:px-12 lg:px-24"
+    >
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-sm tracking-[0.3em] text-white/40 uppercase mb-4">
-          Selected Projects
-        </h2>
-        <p className="text-2xl md:text-3xl font-light text-white/80 mb-16 max-w-2xl">
-          Real solutions that delivered real impact.
-        </p>
-        
-        <div className="space-y-16">
-          {projects.map((project, index) => (
-            <article
+        {/* Big stat heading */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-tight mb-4">
+            Automation that delivers{" "}
+            <span className="text-[#FF4444]">measurable ROI</span>
+          </h2>
+          <p className="text-lg text-white/50 leading-relaxed">
+            Trusted by businesses that value their time. And hundreds of hours
+            saved.
+          </p>
+        </div>
+
+        {/* 2x2 project card grid */}
+        <div className="grid md:grid-cols-2 gap-6">
+          {projects.map((project) => (
+            <div
               key={project.title}
-              className="group relative grid md:grid-cols-[1fr,2fr] gap-8 p-8 border border-white/10 hover:border-white/20 transition-all duration-300"
+              className="group relative p-8 border border-white/[0.08] rounded-xl bg-white/[0.02] border-t-2 border-t-[#FF4444] hover:bg-white/[0.04] transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,68,68,0.08)]"
             >
-              {/* Project number */}
-              <div className="absolute -top-4 -left-4 w-8 h-8 bg-[#0A0A0A] border border-white/20 flex items-center justify-center">
-                <span className="text-xs font-mono text-white/40">0{index + 1}</span>
+              {/* Impact stat */}
+              <div className="mb-5">
+                <span className="text-4xl font-bold text-[#FF4444]">
+                  {project.stat}
+                </span>
+                <span className="text-sm text-white/40 ml-2">
+                  {project.statLabel}
+                </span>
               </div>
-              
-              {/* Left column - metadata */}
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-medium text-white group-hover:text-blue-300 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-white/40 text-sm mt-1">{project.subtitle}</p>
-                </div>
-                
-                <div>
-                  <p className="text-xs text-white/30 uppercase tracking-wider mb-2">Stack</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 text-xs bg-white/5 text-white/60 border border-white/10"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                
-                <div>
-                  <p className="text-xs text-white/30 uppercase tracking-wider mb-2">Impact</p>
-                  <p className="text-blue-400 font-medium">{project.impact}</p>
-                </div>
+
+              {/* Title + subtitle */}
+              <h3 className="text-xl font-semibold text-white mb-1 group-hover:text-[#FF6B6B] transition-colors">
+                {project.title}
+              </h3>
+              <p className="text-sm text-white/40 mb-4">{project.subtitle}</p>
+
+              {/* Description */}
+              <p className="text-white/50 text-sm leading-relaxed mb-6">
+                {project.description}
+              </p>
+
+              {/* Stack pills */}
+              <div className="flex flex-wrap gap-2">
+                {project.stack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-2.5 py-1 text-[11px] bg-white/5 text-white/50 border border-white/[0.08] rounded-full"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
-              
-              {/* Right column - description */}
-              <div className="flex flex-col justify-between">
-                <p className="text-white/60 leading-relaxed text-lg">
-                  {project.description}
-                </p>
-                
-                <div className="mt-8 flex items-center gap-4">
-                  <button className="text-sm text-white/40 hover:text-white transition-colors flex items-center gap-2 group/btn">
-                    <span>View Case Study</span>
-                    <svg
-                      className="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              
-              {/* Hover glow */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-            </article>
+            </div>
           ))}
         </div>
       </div>
