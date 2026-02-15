@@ -1,3 +1,5 @@
+import { Boxes } from "@/components/ui/background-boxes";
+
 const reasons = [
   {
     number: "01",
@@ -29,8 +31,18 @@ const badges = [
 
 export function WhyChoose() {
   return (
-    <section className="py-16 sm:py-24 md:py-32 px-6 md:px-12 lg:px-24">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative py-16 sm:py-24 md:py-32 px-6 md:px-12 lg:px-24 overflow-hidden">
+      {/* Interactive boxes background */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <Boxes />
+      </div>
+
+      {/* Top fade so boxes blend in smoothly */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0A0A0A] to-transparent z-[1] pointer-events-none" />
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A0A0A] to-transparent z-[1] pointer-events-none" />
+
+      <div className="relative z-10 max-w-6xl mx-auto pointer-events-none">
         <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-start">
           {/* Left — large stacked heading */}
           <div>
@@ -74,7 +86,7 @@ export function WhyChoose() {
             <div className="border-t border-white/[0.08]" />
 
             {/* Trust badges — horizontal scroll on mobile */}
-            <div className="flex gap-3 sm:gap-4 overflow-x-auto scrollbar-hide -mx-6 px-6 sm:mx-0 sm:px-0 sm:flex-wrap">
+            <div className="flex gap-3 sm:gap-4 overflow-x-auto scrollbar-hide -mx-6 px-6 sm:mx-0 sm:px-0 sm:flex-wrap pointer-events-auto">
               {badges.map((badge) => (
                 <div
                   key={badge.label}

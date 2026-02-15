@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { Boxes } from "@/components/ui/background-boxes";
+
 const marqueeItems = [
   "24/7 AI Support",
   "Zero Manual Work",
@@ -13,8 +15,16 @@ const marqueeItems = [
 
 export function WorkContact() {
   return (
-    <section className="pt-16 sm:pt-24 md:pt-32 px-6 md:px-12 lg:px-24">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative pt-16 sm:pt-24 md:pt-32 px-6 md:px-12 lg:px-24 overflow-hidden">
+      {/* Interactive boxes background */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <Boxes />
+      </div>
+
+      {/* Top fade so boxes blend in smoothly */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0A0A0A] to-transparent z-[1] pointer-events-none" />
+
+      <div className="relative z-10 max-w-6xl mx-auto pointer-events-none">
         {/* CTA block */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
           <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-6">
@@ -26,7 +36,7 @@ export function WorkContact() {
             Start building for free&mdash;first consultation is on me.
           </p>
 
-          <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3 sm:gap-4">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3 sm:gap-4 pointer-events-auto">
             <Link
               href="/contact"
               className="px-8 py-4 sm:py-3.5 bg-[#FF4444] text-white font-medium rounded-2xl sm:rounded-full hover:bg-[#E03B3B] active:bg-[#CC3333] active:scale-[0.98] transition-all text-base text-center"
@@ -43,8 +53,8 @@ export function WorkContact() {
         </div>
       </div>
 
-      {/* Scrolling marquee */}
-      <div className="border-t border-b border-white/[0.06] py-3 sm:py-4 overflow-hidden">
+      {/* Scrolling marquee — pointer-events-none so boxes stay interactive beneath */}
+      <div className="relative z-10 border-t border-b border-white/[0.06] py-3 sm:py-4 overflow-hidden pointer-events-none">
         <div
           className="flex whitespace-nowrap"
           style={{ animation: "marquee 30s linear infinite" }}
@@ -65,9 +75,9 @@ export function WorkContact() {
       </div>
 
       {/* Footer */}
-      <footer className="py-8 px-6 md:px-12 lg:px-24 safe-bottom">
+      <footer className="relative z-10 py-8 px-6 md:px-12 lg:px-24 safe-bottom pointer-events-none">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 md:gap-4">
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8 pointer-events-auto">
             <a
               href="mailto:your.email@domain.com"
               className="text-white/30 hover:text-white/60 active:text-white/80 transition-colors text-sm py-1"
