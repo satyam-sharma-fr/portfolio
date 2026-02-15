@@ -19,23 +19,24 @@ const watchingNow = [
 
 export function MediaShelf() {
   return (
-    <section className="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-gradient-to-br from-[#4ECDC4]/10 to-[#FFE66D]/10">
+    <section className="py-16 sm:py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-gradient-to-br from-[#4ECDC4]/10 to-[#FFE66D]/10">
       <div className="max-w-6xl mx-auto">
         {/* Section label */}
-        <div className="flex items-center gap-4 mb-6">
-          <span className="text-3xl">🎬</span>
+        <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <span className="text-2xl sm:text-3xl">🎬</span>
           <h2 className="text-sm tracking-widest text-[#2D2A26]/40 uppercase font-medium">
             Media Shelf
           </h2>
         </div>
         
-        <p className="text-2xl md:text-3xl font-medium text-[#2D2A26] mb-16 max-w-2xl">
+        <p className="text-xl sm:text-2xl md:text-3xl font-medium text-[#2D2A26] mb-10 sm:mb-16 max-w-2xl">
           What I&apos;m reading, listening to, and watching.
         </p>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Horizontal scroll on mobile, grid on desktop */}
+        <div className="flex md:grid md:grid-cols-3 gap-4 sm:gap-8 overflow-x-auto md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0 snap-x snap-mandatory scrollbar-hide">
           {/* Currently Reading */}
-          <div className="bg-white rounded-3xl p-8 shadow-sm">
+          <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm snap-start shrink-0 w-[75vw] sm:w-[70vw] md:w-auto">
             <div className="flex items-center gap-3 mb-6">
               <span className="text-2xl">📚</span>
               <h3 className="font-bold text-[#2D2A26]">Reading</h3>
@@ -53,7 +54,7 @@ export function MediaShelf() {
           </div>
 
           {/* Favorite Albums */}
-          <div className="bg-white rounded-3xl p-8 shadow-sm">
+          <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm snap-start shrink-0 w-[75vw] sm:w-[70vw] md:w-auto">
             <div className="flex items-center gap-3 mb-6">
               <span className="text-2xl">🎵</span>
               <h3 className="font-bold text-[#2D2A26]">On Repeat</h3>
@@ -71,7 +72,7 @@ export function MediaShelf() {
           </div>
 
           {/* Watching Now */}
-          <div className="bg-white rounded-3xl p-8 shadow-sm">
+          <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm snap-start shrink-0 w-[75vw] sm:w-[70vw] md:w-auto">
             <div className="flex items-center gap-3 mb-6">
               <span className="text-2xl">🎬</span>
               <h3 className="font-bold text-[#2D2A26]">Watching</h3>

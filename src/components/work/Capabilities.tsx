@@ -61,30 +61,30 @@ const capabilities = [
 
 export function Capabilities() {
   return (
-    <section className="py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-white/[0.02]">
+    <section className="py-16 sm:py-24 md:py-32 px-6 md:px-12 lg:px-24 bg-white/[0.02]">
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-5xl font-semibold tracking-tight mb-6">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight mb-4 sm:mb-6">
             Why businesses choose AI automation
           </h2>
-          <p className="text-lg text-white/50 leading-relaxed">
+          <p className="text-base sm:text-lg text-white/50 leading-relaxed">
             Everything needed to run operations on autopilot.
           </p>
         </div>
 
         {/* Before / After comparison panels */}
-        <div className="grid md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-white/[0.08] mb-16">
+        <div className="grid md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-white/[0.08] mb-10 sm:mb-16">
           {/* Before panel */}
-          <div className="p-8 md:p-10 bg-white/[0.02]">
-            <h3 className="text-xl font-semibold text-white/60 mb-6">
+          <div className="p-5 sm:p-8 md:p-10 bg-white/[0.02]">
+            <h3 className="text-base sm:text-xl font-semibold text-white/60 mb-4 sm:mb-6">
               Doing everything manually
             </h3>
-            <ul className="space-y-4">
+            <ul className="space-y-3 sm:space-y-4">
               {beforeItems.map((item) => (
-                <li key={item} className="flex items-start gap-3">
+                <li key={item} className="flex items-start gap-2.5 sm:gap-3">
                   <svg
-                    className="w-5 h-5 text-white/20 shrink-0 mt-0.5"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-white/20 shrink-0 mt-0.5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -96,7 +96,7 @@ export function Capabilities() {
                       d="M6 18L18 6M6 6l12 12"
                     />
                   </svg>
-                  <span className="text-white/40 text-sm leading-relaxed line-through decoration-white/20">
+                  <span className="text-white/40 text-xs sm:text-sm leading-relaxed line-through decoration-white/20">
                     {item}
                   </span>
                 </li>
@@ -105,15 +105,15 @@ export function Capabilities() {
           </div>
 
           {/* After panel */}
-          <div className="p-8 md:p-10 bg-[#FF4444]/[0.04] border-t md:border-t-0 md:border-l border-white/[0.08]">
-            <h3 className="text-xl font-semibold text-white mb-6">
+          <div className="p-5 sm:p-8 md:p-10 bg-[#FF4444]/[0.04] border-t md:border-t-0 md:border-l border-white/[0.08]">
+            <h3 className="text-base sm:text-xl font-semibold text-white mb-4 sm:mb-6">
               With <span className="text-[#FF4444]">AI Automation</span>
             </h3>
-            <ul className="space-y-4">
+            <ul className="space-y-3 sm:space-y-4">
               {afterItems.map((item) => (
-                <li key={item} className="flex items-start gap-3">
+                <li key={item} className="flex items-start gap-2.5 sm:gap-3">
                   <svg
-                    className="w-5 h-5 text-[#FF4444] shrink-0 mt-0.5"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF4444] shrink-0 mt-0.5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -125,7 +125,7 @@ export function Capabilities() {
                       d="M4.5 12.75l6 6 9-13.5"
                     />
                   </svg>
-                  <span className="text-white/70 text-sm leading-relaxed">
+                  <span className="text-white/70 text-xs sm:text-sm leading-relaxed">
                     {item}
                   </span>
                 </li>
@@ -135,14 +135,14 @@ export function Capabilities() {
         </div>
 
         {/* Capability feature grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid sm:grid-cols-2 gap-4 sm:gap-8">
           {capabilities.map((cap) => (
             <div
               key={cap.title}
-              className="group p-6 border border-white/[0.08] rounded-lg bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300"
+              className="group p-5 sm:p-6 border border-white/[0.08] rounded-xl sm:rounded-lg bg-white/[0.02] hover:bg-white/[0.04] active:bg-white/[0.04] transition-all duration-300"
             >
-              <div className="text-[#FF4444] mb-4">{cap.icon}</div>
-              <h3 className="text-lg font-semibold text-white mb-2">
+              <div className="text-[#FF4444] mb-3 sm:mb-4">{cap.icon}</div>
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-1.5 sm:mb-2">
                 {cap.title}
               </h3>
               <p className="text-white/50 text-sm leading-relaxed">

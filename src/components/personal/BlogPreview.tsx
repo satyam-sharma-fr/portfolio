@@ -28,20 +28,20 @@ function BlogPostCard({ post }: { post: typeof blogPosts[0] }) {
 
   return (
     <article
-      className="group p-6 md:p-8 rounded-2xl bg-white border-2 transition-all duration-300 cursor-pointer hover:shadow-lg"
+      className="group p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl bg-white border-2 transition-all duration-300 cursor-pointer hover:shadow-lg active:scale-[0.99]"
       style={{ borderColor: isHovered ? post.color : "transparent" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h3 className="text-xl font-bold text-[#2D2A26] mb-2 group-hover:translate-x-1 transition-transform">
+          <h3 className="text-lg sm:text-xl font-bold text-[#2D2A26] mb-1.5 sm:mb-2 group-hover:translate-x-1 transition-transform">
             {post.title}
           </h3>
-          <p className="text-[#2D2A26]/60">{post.preview}</p>
+          <p className="text-[#2D2A26]/60 text-sm sm:text-base">{post.preview}</p>
         </div>
         <span
-          className="text-sm px-4 py-2 rounded-full font-medium whitespace-nowrap"
+          className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-medium whitespace-nowrap self-start sm:self-auto"
           style={{ backgroundColor: `${post.color}20`, color: post.color }}
         >
           {post.date}
@@ -53,21 +53,21 @@ function BlogPostCard({ post }: { post: typeof blogPosts[0] }) {
 
 export function BlogPreview() {
   return (
-    <section className="py-24 md:py-32 px-6 md:px-16 lg:px-24">
+    <section className="py-16 sm:py-24 md:py-32 px-6 md:px-16 lg:px-24">
       <div className="max-w-4xl mx-auto">
         {/* Section label */}
-        <div className="flex items-center gap-4 mb-6">
-          <span className="text-3xl">✍️</span>
+        <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <span className="text-2xl sm:text-3xl">✍️</span>
           <h2 className="text-sm tracking-widest text-[#2D2A26]/40 uppercase font-medium">
             Writing
           </h2>
         </div>
 
-        <p className="text-2xl md:text-3xl font-medium text-[#2D2A26] mb-16 max-w-2xl">
+        <p className="text-xl sm:text-2xl md:text-3xl font-medium text-[#2D2A26] mb-10 sm:mb-16 max-w-2xl">
           Thoughts, ideas, and things I&apos;m figuring out.
         </p>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {blogPosts.map((post) => (
             <BlogPostCard key={post.title} post={post} />
           ))}

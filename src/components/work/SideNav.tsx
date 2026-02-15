@@ -11,19 +11,22 @@ export function SideNav() {
       {/* Top left - Home link */}
       <Link
         href="/"
-        className="fixed top-6 left-6 z-50 text-white/40 hover:text-white transition-colors text-sm tracking-[0.2em] uppercase"
+        className="fixed top-4 left-4 md:top-6 md:left-6 z-50 flex items-center justify-center w-10 h-10 md:w-auto md:h-auto rounded-full md:rounded-none bg-white/[0.06] md:bg-transparent backdrop-blur-sm md:backdrop-blur-none text-white/60 md:text-white/40 hover:text-white active:bg-white/[0.12] transition-colors text-sm tracking-[0.2em] uppercase"
       >
-        ← Home
+        <span className="hidden md:inline">← Home</span>
+        <svg className="w-5 h-5 md:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
       </Link>
       
       {/* Bottom left corner - subtle link to personal side */}
       <Link
         href="/me"
-        className="fixed bottom-6 left-6 z-50 group"
+        className="fixed bottom-4 left-4 md:bottom-6 md:left-6 z-50 group no-min-touch"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 py-2 px-3 md:py-0 md:px-0 rounded-full md:rounded-none bg-white/[0.04] md:bg-transparent backdrop-blur-sm md:backdrop-blur-none">
           {/* Animated indicator */}
           <div
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
@@ -39,10 +42,10 @@ export function SideNav() {
             The Human Side
           </span>
           
-          {/* Arrow that appears on hover */}
+          {/* Arrow — always visible on mobile, hover on desktop */}
           <svg
-            className={`w-3 h-3 transition-all duration-300 ${
-              isHovered ? "opacity-100 translate-x-0 text-[#F7C59F]" : "opacity-0 -translate-x-2"
+            className={`w-3 h-3 transition-all duration-300 text-[#F7C59F]/50 md:text-[#F7C59F] ${
+              isHovered ? "md:opacity-100 md:translate-x-0" : "md:opacity-0 md:-translate-x-2"
             }`}
             fill="none"
             viewBox="0 0 24 24"

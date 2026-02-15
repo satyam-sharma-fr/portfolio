@@ -142,7 +142,7 @@ export function EstimateResults({ result, name }: EstimateResultsProps) {
       </header>
 
       {/* Content */}
-      <div className="flex-1 px-6 py-12 sm:py-16">
+      <div className="flex-1 px-5 sm:px-6 py-8 sm:py-12 md:py-16">
         <motion.div
           className="max-w-2xl mx-auto"
           variants={containerVariants}
@@ -164,7 +164,7 @@ export function EstimateResults({ result, name }: EstimateResultsProps) {
             >
               <Sparkles className="w-8 h-8 text-[#FF4444]" />
             </motion.div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-white mb-3 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight">
               Hey {firstName}, your estimate is ready!
             </h1>
             <p className="text-white/35 text-base">
@@ -299,7 +299,7 @@ export function EstimateResults({ result, name }: EstimateResultsProps) {
           >
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2.5 px-8 py-4 bg-gradient-to-r from-[#FF4444] to-[#FF6B6B] text-white font-semibold rounded-full shadow-[0_0_30px_rgba(255,68,68,0.25)] hover:shadow-[0_0_40px_rgba(255,68,68,0.4)] transition-all duration-300 text-base"
+              className="inline-flex items-center gap-2.5 px-8 py-4 bg-gradient-to-r from-[#FF4444] to-[#FF6B6B] text-white font-semibold rounded-full shadow-[0_0_30px_rgba(255,68,68,0.25)] hover:shadow-[0_0_40px_rgba(255,68,68,0.4)] active:scale-[0.98] transition-all duration-300 text-base"
             >
               Let&apos;s Discuss Your Project
               <ArrowRight className="w-4 h-4" />

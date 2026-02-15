@@ -239,7 +239,7 @@ function DemoPanel() {
   const ActiveDemo = services[activeSlide].Demo;
 
   return (
-    <div className="border border-white/[0.08] rounded-xl bg-[#0D0D0D] overflow-hidden h-[420px] lg:h-[480px]">
+    <div className="border border-white/[0.08] rounded-xl bg-[#0D0D0D] overflow-hidden h-[380px] sm:h-[420px] lg:h-[480px]">
       <Suspense fallback={<DemoSkeleton />}>
         <ActiveDemo key={activeSlide} />
       </Suspense>
@@ -270,9 +270,20 @@ export function Services() {
         {/* Two-column layout: sidebar nav + info & demo panel */}
         <HoverSlider>
           <div className="grid lg:grid-cols-[auto_1fr] gap-8 lg:gap-12">
-            {/* Left — service names only */}
+            {/* Left — service names: horizontal scroll on mobile, vertical on desktop */}
             <div className="flex flex-col justify-center">
-              <div className="flex flex-col space-y-1.5 md:space-y-2">
+              {/* Mobile: horizontal scrollable tabs */}
+              <div className="lg:hidden -mx-6 px-6">
+                <div className="flex gap-2 overflow-x-auto pb-3 scroll-touch snap-x snap-mandatory scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+                  {services.map((service, index) => (
+                    <div key={service.title} className="snap-start shrink-0">
+                      <ServiceNameItem service={service} index={index} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Desktop: vertical list */}
+              <div className="hidden lg:flex flex-col space-y-2">
                 {services.map((service, index) => (
                   <ServiceNameItem
                     key={service.title}

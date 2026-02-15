@@ -38,11 +38,11 @@ function AnimatedCounter({
 
   return (
     <div ref={ref} className="text-center">
-      <p className="text-4xl md:text-5xl font-bold text-white tabular-nums tracking-tight">
+      <p className="text-2xl sm:text-4xl md:text-5xl font-bold text-white tabular-nums tracking-tight">
         {display}
         <span className="text-[#FF4444]">{suffix}</span>
       </p>
-      <p className="text-white/40 text-sm mt-2">{label}</p>
+      <p className="text-white/40 text-[11px] sm:text-sm mt-1 sm:mt-2">{label}</p>
     </div>
   );
 }
@@ -72,7 +72,7 @@ export function Introduction() {
   return (
     <section
       ref={ref}
-      className="relative z-[1] py-36 md:py-48 px-6 md:px-12 lg:px-24 overflow-hidden pointer-events-none"
+      className="relative z-[1] py-20 sm:py-36 md:py-48 px-6 md:px-12 lg:px-24 overflow-hidden pointer-events-none"
     >
       {/* Subtle ambient glow */}
       <div
@@ -85,7 +85,7 @@ export function Introduction() {
 
       <div className="relative max-w-4xl mx-auto text-center">
         {/* ── Manifesto heading ── */}
-        <h2 className="text-3xl md:text-5xl lg:text-[3.5rem] font-semibold tracking-tight leading-[1.2]">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-[3.5rem] font-semibold tracking-tight leading-[1.2]">
           <motion.span
             className="block text-white/50"
             variants={reveal}
@@ -113,7 +113,7 @@ export function Introduction() {
 
         {/* ── Punchline ── */}
         <motion.p
-          className="mt-8 md:mt-10 text-xl md:text-2xl text-[#FF4444] font-medium"
+          className="mt-6 sm:mt-8 md:mt-10 text-lg sm:text-xl md:text-2xl text-[#FF4444] font-medium"
           variants={reveal}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
@@ -140,7 +140,7 @@ export function Introduction() {
 
         {/* ── Stats ── */}
         <motion.div
-          className="grid grid-cols-3 gap-6 md:gap-16"
+          className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{

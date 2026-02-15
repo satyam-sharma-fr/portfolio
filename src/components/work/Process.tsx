@@ -279,40 +279,40 @@ export function Process() {
         {/* ===== Mobile: Stacked timeline cards ===== */}
         <div className="md:hidden space-y-0">
           {steps.map((step, i) => (
-            <div key={i} className="relative pl-8">
+            <div key={i} className="relative pl-7 sm:pl-8">
               {/* Timeline track */}
               <div
                 className={`absolute left-[7px] top-0 w-[2px] ${
                   i === 0 ? "h-1/2 top-1/2" : i === steps.length - 1 ? "h-1/2" : "h-full"
-                } ${i < steps.length - 1 ? "bg-white/[0.06]" : "bg-white/[0.06]"}`}
+                } bg-white/[0.06]`}
               />
               {/* Dot */}
-              <div className="absolute left-0 top-8 w-[16px] h-[16px] rounded-full border-2 border-[#FF4444] bg-[#FF4444] shadow-[0_0_10px_rgba(255,68,68,0.3)]" />
+              <div className="absolute left-0 top-7 w-[16px] h-[16px] rounded-full border-2 border-[#FF4444] bg-[#FF4444] shadow-[0_0_10px_rgba(255,68,68,0.3)]" />
 
               {/* Card */}
-              <div className="py-4">
-                <div className="p-6 border border-white/[0.08] rounded-xl bg-white/[0.02]">
+              <div className="py-3 sm:py-4">
+                <div className="p-4 sm:p-6 border border-white/[0.08] rounded-xl bg-white/[0.02]">
                   {/* Step header */}
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-3xl font-bold text-[#FF4444]/15 font-mono">
+                  <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                    <span className="text-2xl sm:text-3xl font-bold text-[#FF4444]/15 font-mono">
                       {step.number}
                     </span>
-                    <h3 className="text-lg font-semibold text-white">
+                    <h3 className="text-base sm:text-lg font-semibold text-white">
                       {step.title}
                     </h3>
                   </div>
 
                   {/* Description */}
-                  <p className="text-white/50 text-sm leading-relaxed mb-5">
+                  <p className="text-white/50 text-[13px] sm:text-sm leading-relaxed mb-4 sm:mb-5">
                     {step.description}
                   </p>
 
                   {/* Deliverables */}
-                  <ul className="space-y-2.5 mb-5">
+                  <ul className="space-y-2 sm:space-y-2.5 mb-4 sm:mb-5">
                     {step.deliverables.map((item) => (
                       <li
                         key={item}
-                        className="flex items-start gap-2.5 text-sm text-white/40"
+                        className="flex items-start gap-2 sm:gap-2.5 text-[13px] sm:text-sm text-white/40"
                       >
                         <svg
                           className="w-3.5 h-3.5 text-[#FF4444] shrink-0 mt-0.5"
@@ -333,11 +333,11 @@ export function Process() {
                   </ul>
 
                   {/* Outcome stat */}
-                  <div className="p-4 rounded-lg bg-[#FF4444]/[0.04] border border-[#FF4444]/10">
-                    <span className="text-xl font-bold text-[#FF4444]">
+                  <div className="p-3 sm:p-4 rounded-lg bg-[#FF4444]/[0.04] border border-[#FF4444]/10">
+                    <span className="text-lg sm:text-xl font-bold text-[#FF4444]">
                       {step.outcome}
                     </span>
-                    <p className="text-white/40 text-xs mt-0.5">
+                    <p className="text-white/40 text-[11px] sm:text-xs mt-0.5">
                       {step.outcomeLabel}
                     </p>
                   </div>

@@ -374,8 +374,8 @@ export function WorkHero() {
       </div>
 
       {/* ===== Mobile layout ===== */}
-      <div className="relative z-10 md:hidden w-full pt-28 pb-10 pointer-events-none">
-        <h1 className="text-3xl font-bold tracking-tight leading-[1.1] mb-4">
+      <div className="relative z-10 md:hidden w-full pt-24 pb-16 pointer-events-none safe-bottom">
+        <h1 className="text-[1.75rem] sm:text-3xl font-bold tracking-tight leading-[1.12] mb-4">
           <span
             className="block opacity-0"
             style={{ animation: "hero-slide-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s both" }}
@@ -399,7 +399,7 @@ export function WorkHero() {
 
         {/* Sub-headline */}
         <p
-          className="text-base text-white/45 leading-relaxed mb-6 opacity-0"
+          className="text-[15px] sm:text-base text-white/45 leading-relaxed mb-5 opacity-0"
           style={{ animation: "hero-slide-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.55s both" }}
         >
           One automation system can save your team{" "}
@@ -410,14 +410,14 @@ export function WorkHero() {
 
         {/* Photo — slides up */}
         <div
-          className="relative flex justify-center mb-6 -mx-6 opacity-0"
+          className="relative flex justify-center mb-5 -mx-6 opacity-0"
           style={{ animation: "hero-slide-up 0.8s cubic-bezier(0.16,1,0.3,1) 0.5s both" }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/satyam.png"
             alt="Satyam — AI Automation Engineer"
-            className="object-cover object-top w-[320px] h-auto max-h-[50vh] select-none"
+            className="object-cover object-top w-[280px] sm:w-[320px] h-auto max-h-[45vh] select-none"
             style={{
               maskImage:
                 "linear-gradient(to bottom, black 50%, transparent 85%)",
@@ -425,43 +425,56 @@ export function WorkHero() {
                 "linear-gradient(to bottom, black 50%, transparent 85%)",
             }}
           />
-
         </div>
 
-        {/* Available badge — below photo on mobile */}
+        {/* Stats + Available badge row */}
         <div
-          className="flex justify-center mb-4 opacity-0"
+          className="flex items-center justify-between gap-3 mb-5 opacity-0"
           style={{ animation: "hero-scale-in 0.5s cubic-bezier(0.16,1,0.3,1) 0.7s both" }}
         >
+          <div className="flex items-center gap-4 bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] rounded-xl px-4 py-3">
+            <div className="text-center">
+              <p className="text-xl font-bold text-white">70%</p>
+              <p className="text-white/40 text-[10px]">Fewer Tickets</p>
+            </div>
+            <div className="w-px h-8 bg-white/10" />
+            <div className="text-center">
+              <p className="text-xl font-bold text-white">24/7</p>
+              <p className="text-white/40 text-[10px]">AI Uptime</p>
+            </div>
+          </div>
           <AvailableBadge />
         </div>
 
         {/* Social proof row — fades up */}
         <SocialProofRow
-          className="mb-6 opacity-0"
+          className="mb-5 opacity-0"
           style={{ animation: "hero-slide-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.8s both" }}
         />
 
-        {/* CTAs — fade in */}
+        {/* CTAs — fade in, larger touch targets */}
         <div
           className="flex flex-col gap-3 opacity-0"
           style={{ animation: "hero-fade-in 0.5s ease-out 1s both" }}
         >
           <Link
             href="/contact"
-            className="pointer-events-auto inline-block px-8 py-3.5 bg-white/[0.07] backdrop-blur-sm border border-white/[0.1] text-white font-medium rounded-full hover:bg-white/[0.1] transition-colors text-base text-center"
+            className="pointer-events-auto flex items-center justify-center gap-2 px-8 py-4 bg-white/[0.07] backdrop-blur-sm border border-white/[0.1] text-white font-medium rounded-2xl active:bg-white/[0.12] active:scale-[0.98] transition-all text-base text-center"
           >
+            <svg className="w-4 h-4 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+            </svg>
             Book a Free Consultation
           </Link>
           <Link
             href="/estimate"
-            className="pointer-events-auto bg-[#141414] no-underline group cursor-pointer relative shadow-2xl shadow-red-950/30 rounded-full p-px font-semibold leading-6 text-white inline-block"
+            className="pointer-events-auto bg-[#141414] no-underline group cursor-pointer relative shadow-2xl shadow-red-950/30 rounded-2xl p-px font-semibold leading-6 text-white inline-block active:scale-[0.98] transition-transform"
           >
-            <span className="absolute inset-0 overflow-hidden rounded-full">
-              <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(255,68,68,0.6)_0%,rgba(255,68,68,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <span className="absolute inset-0 overflow-hidden rounded-2xl">
+              <span className="absolute inset-0 rounded-2xl bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(255,68,68,0.6)_0%,rgba(255,68,68,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             </span>
-            <div className="relative flex items-center justify-center gap-2 z-10 rounded-full bg-[#0A0A0A] px-8 py-3.5 ring-1 ring-white/10">
-              <svg className="w-4 h-4 text-[#FF4444]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <div className="relative flex items-center justify-center gap-2.5 z-10 rounded-2xl bg-[#0A0A0A] px-8 py-4 ring-1 ring-white/10">
+              <svg className="w-4.5 h-4.5 text-[#FF4444]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
               </svg>
               <span className="text-base font-medium bg-clip-text text-transparent bg-gradient-to-r from-neutral-200 via-white to-neutral-200">

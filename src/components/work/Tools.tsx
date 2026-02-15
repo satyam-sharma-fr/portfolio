@@ -398,23 +398,34 @@ export function Tools() {
           </div>
         </div>
 
-        {/* ===== Mobile: Compact icon grid ===== */}
-        <div className="md:hidden">
-          <div className="flex flex-wrap justify-center gap-4">
-            {allTools.map((tool) => (
-              <div
-                key={tool.name}
-                className="flex flex-col items-center gap-1.5"
-              >
-                <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-white/[0.04] border border-white/[0.06]">
-                  <ToolIcon tool={tool} size={18} />
-                </div>
-                <span className="text-[10px] text-white/30 font-medium">
-                  {tool.name}
-                </span>
+        {/* ===== Mobile: Categorized icon grid with labels ===== */}
+        <div className="md:hidden space-y-8">
+          {rings.map((ring) => (
+            <div key={ring.label}>
+              {/* Category label */}
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-2 h-2 rounded-full bg-[#FF4444]/50" />
+                <h3 className="text-xs uppercase tracking-[0.15em] text-white/40 font-semibold">{ring.label}</h3>
+                <div className="flex-1 h-px bg-white/[0.06]" />
               </div>
-            ))}
-          </div>
+              {/* Tool icons in a responsive grid */}
+              <div className="grid grid-cols-4 sm:grid-cols-5 gap-3">
+                {ring.tools.map((tool) => (
+                  <div
+                    key={tool.name}
+                    className="flex flex-col items-center gap-1.5"
+                  >
+                    <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.06]">
+                      <ToolIcon tool={tool} size={20} />
+                    </div>
+                    <span className="text-[9px] sm:text-[10px] text-white/30 font-medium text-center leading-tight">
+                      {tool.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

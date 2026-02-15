@@ -795,7 +795,7 @@ export function EstimateWizard() {
       </header>
 
       {/* Main content area */}
-      <div className="flex-1 flex items-start justify-center px-6 py-12 sm:py-16">
+      <div className="flex-1 flex items-start justify-center px-5 sm:px-6 py-8 sm:py-12 md:py-16">
         <div className="w-full max-w-2xl">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
@@ -807,11 +807,11 @@ export function EstimateWizard() {
               exit="exit"
             >
               {/* Question heading */}
-              <div className="text-center mb-10">
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 tracking-tight">
+              <div className="text-center mb-7 sm:mb-10">
+                <h1 className="text-xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 sm:mb-3 tracking-tight leading-tight">
                   {STEPS[step].question}
                 </h1>
-                <p className="text-white/35 text-sm sm:text-base">
+                <p className="text-white/35 text-xs sm:text-sm md:text-base">
                   {STEPS[step].subtitle}
                 </p>
               </div>
@@ -834,7 +834,7 @@ export function EstimateWizard() {
 
           {/* Navigation buttons */}
           <motion.div
-            className="flex items-center justify-center gap-4 mt-12"
+            className="flex items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -844,7 +844,7 @@ export function EstimateWizard() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={goBack}
-                className="flex items-center gap-2 px-6 py-3 rounded-full border border-white/[0.1] text-white/50 text-sm font-medium hover:bg-white/[0.04] hover:text-white/80 transition-all"
+                className="flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3 rounded-full border border-white/[0.1] text-white/50 text-sm font-medium hover:bg-white/[0.04] hover:text-white/80 active:bg-white/[0.08] transition-all"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back
@@ -857,7 +857,7 @@ export function EstimateWizard() {
               onClick={goNext}
               disabled={step !== 3 && !isValid()}
               className={cn(
-                "flex items-center gap-2 px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300",
+                "flex items-center gap-2 px-6 sm:px-8 py-3.5 sm:py-3 rounded-full text-sm font-semibold transition-all duration-300",
                 isValid() || step === 3
                   ? "bg-gradient-to-r from-[#FF4444] to-[#FF6B6B] text-white shadow-[0_0_24px_rgba(255,68,68,0.25)] hover:shadow-[0_0_36px_rgba(255,68,68,0.35)]"
                   : "bg-white/[0.05] text-white/20 cursor-not-allowed"

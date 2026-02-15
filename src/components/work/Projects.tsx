@@ -65,35 +65,35 @@ export function Projects() {
           {projects.map((project) => (
             <div
               key={project.title}
-              className="group relative p-8 border border-white/[0.08] rounded-xl bg-white/[0.02] border-t-2 border-t-[#FF4444] hover:bg-white/[0.04] transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,68,68,0.08)]"
+              className="group relative p-5 sm:p-8 border border-white/[0.08] rounded-xl bg-white/[0.02] border-t-2 border-t-[#FF4444] hover:bg-white/[0.04] active:bg-white/[0.04] transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,68,68,0.08)]"
             >
               {/* Impact stat */}
-              <div className="mb-5">
-                <span className="text-4xl font-bold text-[#FF4444]">
+              <div className="mb-4 sm:mb-5">
+                <span className="text-3xl sm:text-4xl font-bold text-[#FF4444]">
                   {project.stat}
                 </span>
-                <span className="text-sm text-white/40 ml-2">
+                <span className="text-xs sm:text-sm text-white/40 ml-2">
                   {project.statLabel}
                 </span>
               </div>
 
               {/* Title + subtitle */}
-              <h3 className="text-xl font-semibold text-white mb-1 group-hover:text-[#FF6B6B] transition-colors">
+              <h3 className="text-lg sm:text-xl font-semibold text-white mb-1 group-hover:text-[#FF6B6B] transition-colors">
                 {project.title}
               </h3>
-              <p className="text-sm text-white/40 mb-4">{project.subtitle}</p>
+              <p className="text-xs sm:text-sm text-white/40 mb-3 sm:mb-4">{project.subtitle}</p>
 
               {/* Description */}
-              <p className="text-white/50 text-sm leading-relaxed mb-6">
+              <p className="text-white/50 text-sm leading-relaxed mb-4 sm:mb-6">
                 {project.description}
               </p>
 
-              {/* Stack pills */}
-              <div className="flex flex-wrap gap-2">
+              {/* Stack pills — horizontal scroll on small screens */}
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {project.stack.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 py-1 text-[11px] bg-white/5 text-white/50 border border-white/[0.08] rounded-full"
+                    className="px-2 sm:px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-[11px] bg-white/5 text-white/50 border border-white/[0.08] rounded-full"
                   >
                     {tech}
                   </span>

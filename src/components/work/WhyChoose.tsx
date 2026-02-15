@@ -29,14 +29,15 @@ const badges = [
 
 export function WhyChoose() {
   return (
-    <section className="py-24 md:py-32 px-6 md:px-12 lg:px-24">
+    <section className="py-16 sm:py-24 md:py-32 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-16 md:gap-20 items-start">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-start">
           {/* Left — large stacked heading */}
           <div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] uppercase">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] uppercase">
               Why
-              <br />
+              <br className="hidden sm:block" />
+              <span className="sm:hidden"> </span>
               Businesses
               <br />
               Choose
@@ -46,19 +47,19 @@ export function WhyChoose() {
           </div>
 
           {/* Right — numbered reasons + badges */}
-          <div className="space-y-10">
+          <div className="space-y-8 sm:space-y-10">
             {/* Numbered list */}
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {reasons.map((reason) => (
-                <div key={reason.number} className="flex items-start gap-6">
+                <div key={reason.number} className="flex items-start gap-4 sm:gap-6">
                   {/* Number */}
-                  <span className="text-lg font-semibold text-white/20 tabular-nums shrink-0 mt-0.5">
+                  <span className="text-base sm:text-lg font-semibold text-white/20 tabular-nums shrink-0 mt-0.5">
                     {reason.number}
                   </span>
 
                   {/* Content */}
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-1">
+                    <h3 className="text-base sm:text-lg font-semibold text-white mb-1">
                       {reason.title}
                     </h3>
                     <p className="text-sm text-white/40 leading-relaxed">
@@ -72,16 +73,16 @@ export function WhyChoose() {
             {/* Separator */}
             <div className="border-t border-white/[0.08]" />
 
-            {/* Trust badges */}
-            <div className="flex flex-wrap gap-4">
+            {/* Trust badges — horizontal scroll on mobile */}
+            <div className="flex gap-3 sm:gap-4 overflow-x-auto scrollbar-hide -mx-6 px-6 sm:mx-0 sm:px-0 sm:flex-wrap">
               {badges.map((badge) => (
                 <div
                   key={badge.label}
-                  className="flex items-center gap-3 px-5 py-3 border border-white/[0.08] rounded-lg bg-white/[0.02]"
+                  className="flex items-center gap-2.5 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 border border-white/[0.08] rounded-lg bg-white/[0.02] shrink-0"
                 >
                   {/* Shield icon */}
                   <svg
-                    className="w-5 h-5 text-[#FF4444]/60 shrink-0"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF4444]/60 shrink-0"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -95,10 +96,10 @@ export function WhyChoose() {
                   </svg>
 
                   <div className="leading-tight">
-                    <span className="text-xs font-semibold text-white/70 uppercase tracking-wider block">
+                    <span className="text-[11px] sm:text-xs font-semibold text-white/70 uppercase tracking-wider block whitespace-nowrap">
                       {badge.label}
                     </span>
-                    <span className="text-[10px] text-white/30 uppercase tracking-wider">
+                    <span className="text-[9px] sm:text-[10px] text-white/30 uppercase tracking-wider">
                       {badge.detail}
                     </span>
                   </div>

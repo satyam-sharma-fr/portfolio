@@ -23,29 +23,29 @@ const values = [
 
 export function Values() {
   return (
-    <section className="py-24 md:py-32 px-6 md:px-16 lg:px-24">
+    <section className="py-16 sm:py-24 md:py-32 px-6 md:px-16 lg:px-24">
       <div className="max-w-4xl mx-auto">
         {/* Section label */}
-        <div className="flex items-center gap-4 mb-6">
-          <span className="text-3xl">💭</span>
+        <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <span className="text-2xl sm:text-3xl">💭</span>
           <h2 className="text-sm tracking-widest text-[#2D2A26]/40 uppercase font-medium">
             What I Believe
           </h2>
         </div>
         
-        <p className="text-2xl md:text-3xl font-medium text-[#2D2A26] mb-16 max-w-2xl">
+        <p className="text-xl sm:text-2xl md:text-3xl font-medium text-[#2D2A26] mb-10 sm:mb-16 max-w-2xl">
           The principles that guide how I live and work.
         </p>
 
-        <div className="space-y-12">
+        <div className="space-y-8 sm:space-y-12">
           {values.map((value, index) => (
             <div
               key={value.number}
-              className="group grid md:grid-cols-[100px,1fr] gap-6 items-start"
+              className="group grid grid-cols-[60px,1fr] md:grid-cols-[100px,1fr] gap-3 sm:gap-6 items-start"
             >
               {/* Number with decorative element */}
               <div className="relative">
-                <span className="text-6xl md:text-7xl font-bold text-[#2D2A26]/5 group-hover:text-[#FF6B6B]/20 transition-colors duration-500">
+                <span className="text-5xl sm:text-6xl md:text-7xl font-bold text-[#2D2A26]/5 group-hover:text-[#FF6B6B]/20 transition-colors duration-500">
                   {value.number}
                 </span>
                 <div
@@ -56,11 +56,11 @@ export function Values() {
                 />
               </div>
 
-              <div className="pt-4">
-                <h3 className="text-2xl font-bold text-[#2D2A26] mb-3 group-hover:translate-x-2 transition-transform duration-300">
+              <div className="pt-2 sm:pt-4">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#2D2A26] mb-2 sm:mb-3 group-hover:translate-x-2 transition-transform duration-300">
                   {value.title}
                 </h3>
-                <p className="text-lg text-[#2D2A26]/60 leading-relaxed max-w-xl">
+                <p className="text-base sm:text-lg text-[#2D2A26]/60 leading-relaxed max-w-xl">
                   {value.description}
                 </p>
               </div>

@@ -197,7 +197,7 @@ export function Gateway() {
       />
 
       {/* Top - Name */}
-      <div className="absolute top-8 md:top-12 left-1/2 -translate-x-1/2 z-40 pointer-events-none text-center">
+      <div className="absolute top-[30%] md:top-12 left-1/2 -translate-x-1/2 md:translate-y-0 -translate-y-1/2 z-40 pointer-events-none text-center">
         <h1
           className={`text-3xl md:text-4xl lg:text-5xl font-extralight tracking-[0.15em] text-white transition-all duration-700 ${
             hoveredSide ? "opacity-60" : "opacity-90"
@@ -205,9 +205,9 @@ export function Gateway() {
         >
           SATYAM SHARMA
         </h1>
-        {/* Subtitle only appears on hover */}
+        {/* Subtitle — on mobile always show a subtle tagline, on desktop show on hover */}
         <p
-          className={`mt-2 text-xs tracking-[0.3em] uppercase transition-all duration-500 ${
+          className={`mt-2 text-xs tracking-[0.3em] uppercase transition-all duration-500 md:${
             hoveredSide === "personal"
               ? "text-[#F7C59F] opacity-100"
               : hoveredSide === "work"
@@ -215,20 +215,24 @@ export function Gateway() {
               : "opacity-0"
           }`}
         >
-          {hoveredSide === "personal"
-            ? "The Human"
-            : hoveredSide === "work"
-            ? "The Engineer"
-            : ""}
+          <span className="md:hidden text-white/30">Choose your path</span>
+          <span className="hidden md:inline">
+            {hoveredSide === "personal"
+              ? "The Human"
+              : hoveredSide === "work"
+              ? "The Engineer"
+              : "\u00A0"}
+          </span>
         </p>
       </div>
 
       {/* Split screen interactive areas - 45% | 10% neutral | 45% */}
-      <div className="absolute inset-0 z-30 flex flex-col md:flex-row">
+      {/* Desktop: side-by-side with hover */}
+      <div className="absolute inset-0 z-30 hidden md:flex md:flex-row">
         {/* Personal Side - LEFT 45% */}
         <Link
           href="/me"
-          className="md:w-[45%] flex-1 md:flex-none flex items-end md:items-end justify-start p-8 md:p-12 md:pb-24 group cursor-pointer"
+          className="md:w-[45%] flex items-end justify-start p-12 pb-24 group cursor-pointer"
           onMouseEnter={() => setHoveredSide("personal")}
           onMouseLeave={() => setHoveredSide(null)}
         >
@@ -248,7 +252,7 @@ export function Gateway() {
                 The Human
               </p>
               <h2
-                className={`text-2xl md:text-3xl font-light tracking-tight transition-all duration-500 ${
+                className={`text-3xl font-light tracking-tight transition-all duration-500 ${
                   hoveredSide === "personal" ? "text-white translate-x-2" : "text-white/70"
                 }`}
               >
@@ -277,12 +281,12 @@ export function Gateway() {
         </Link>
 
         {/* NEUTRAL ZONE - MIDDLE 10% (no hover interaction) */}
-        <div className="hidden md:block md:w-[10%] pointer-events-none" />
+        <div className="md:w-[10%] pointer-events-none" />
 
         {/* Work Side - RIGHT 45% */}
         <Link
           href="/work"
-          className="md:w-[45%] flex-1 md:flex-none flex items-start md:items-end justify-end p-8 md:p-12 md:pb-24 group cursor-pointer"
+          className="md:w-[45%] flex items-end justify-end p-12 pb-24 group cursor-pointer"
           onMouseEnter={() => setHoveredSide("work")}
           onMouseLeave={() => setHoveredSide(null)}
         >
@@ -302,7 +306,7 @@ export function Gateway() {
                 The Engineer
               </p>
               <h2
-                className={`text-2xl md:text-3xl font-light tracking-tight transition-all duration-500 ${
+                className={`text-3xl font-light tracking-tight transition-all duration-500 ${
                   hoveredSide === "work" ? "text-white -translate-x-2" : "text-white/70"
                 }`}
               >
@@ -329,6 +333,53 @@ export function Gateway() {
             </div>
           </div>
         </Link>
+      </div>
+
+      {/* Mobile: Vertical card-based layout with clear CTAs */}
+      <div className="absolute inset-0 z-30 flex flex-col md:hidden safe-bottom">
+        {/* Spacer to push content below the name */}
+        <div className="flex-1" />
+
+        {/* Mobile CTA cards */}
+        <div className="px-6 pb-10 space-y-3"
+          style={{ animation: "hero-slide-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s both" }}
+        >
+          {/* Personal card */}
+          <Link
+            href="/me"
+            className="group flex items-center gap-5 p-5 rounded-2xl bg-white/[0.05] backdrop-blur-md border border-white/[0.08] active:bg-white/[0.1] active:scale-[0.98] transition-all duration-200"
+          >
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FF6B35]/20 to-[#F7C59F]/20 border border-[#FF6B35]/20 flex items-center justify-center shrink-0">
+              <span className="text-xl">👤</span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[10px] tracking-[0.3em] uppercase text-[#F7C59F]/80 mb-0.5">The Human</p>
+              <h2 className="text-lg font-light text-white leading-tight">See who I am</h2>
+              <p className="text-xs text-white/35 mt-0.5 truncate">Life, interests, values & more</p>
+            </div>
+            <svg className="w-5 h-5 text-[#F7C59F]/60 shrink-0 group-active:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+
+          {/* Work card */}
+          <Link
+            href="/work"
+            className="group flex items-center gap-5 p-5 rounded-2xl bg-white/[0.05] backdrop-blur-md border border-white/[0.08] active:bg-white/[0.1] active:scale-[0.98] transition-all duration-200"
+          >
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#64C8FF]/20 to-[#3B82F6]/20 border border-[#64C8FF]/20 flex items-center justify-center shrink-0">
+              <span className="text-xl">⚡</span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[10px] tracking-[0.3em] uppercase text-[#64C8FF]/80 mb-0.5">The Engineer</p>
+              <h2 className="text-lg font-light text-white leading-tight">See what I build</h2>
+              <p className="text-xs text-white/35 mt-0.5 truncate">AI automation, projects & work</p>
+            </div>
+            <svg className="w-5 h-5 text-[#64C8FF]/60 shrink-0 group-active:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
       </div>
 
     </div>
