@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { Boxes } from "@/components/ui/background-boxes";
+import { PulseBeams, type BeamPath } from "@/components/ui/pulse-beams";
 
 const TICKER_ITEMS = [
   "Zapier Automation",
@@ -12,6 +14,115 @@ const TICKER_ITEMS = [
   "Lead Nurturing",
   "Invoice Automation",
 ];
+
+const ESTIMATE_BEAMS: BeamPath[] = [
+  {
+    path: "M170 100H60C54.5 100 50 95.5 50 90V30",
+    gradientConfig: {
+      initial: { x1: "0%", x2: "0%", y1: "80%", y2: "100%" },
+      animate: {
+        x1: ["0%", "0%", "200%"],
+        x2: ["0%", "0%", "180%"],
+        y1: ["80%", "0%", "0%"],
+        y2: ["100%", "20%", "20%"],
+      },
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "loop" as const,
+        ease: "linear",
+        repeatDelay: 2,
+        delay: 0.2,
+      },
+    },
+  },
+  {
+    path: "M330 100H440C445.5 100 450 95.5 450 90V30",
+    gradientConfig: {
+      initial: { x1: "0%", x2: "0%", y1: "80%", y2: "100%" },
+      animate: {
+        x1: ["20%", "100%", "100%"],
+        x2: ["0%", "90%", "90%"],
+        y1: ["80%", "80%", "-20%"],
+        y2: ["100%", "100%", "0%"],
+      },
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "loop" as const,
+        ease: "linear",
+        repeatDelay: 2,
+        delay: 0.8,
+      },
+    },
+  },
+  {
+    path: "M200 150V185C200 190.5 195.5 195 190 195H45",
+    gradientConfig: {
+      initial: { x1: "0%", x2: "0%", y1: "80%", y2: "100%" },
+      animate: {
+        x1: ["20%", "100%", "100%"],
+        x2: ["0%", "90%", "90%"],
+        y1: ["80%", "80%", "-20%"],
+        y2: ["100%", "100%", "0%"],
+      },
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "loop" as const,
+        ease: "linear",
+        repeatDelay: 2,
+        delay: 1.4,
+      },
+    },
+  },
+  {
+    path: "M300 150V185C300 190.5 304.5 195 310 195H455",
+    gradientConfig: {
+      initial: { x1: "40%", x2: "50%", y1: "160%", y2: "180%" },
+      animate: {
+        x1: "0%",
+        x2: "10%",
+        y1: "-40%",
+        y2: "-20%",
+      },
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "loop" as const,
+        ease: "linear",
+        repeatDelay: 2,
+        delay: 1.8,
+      },
+    },
+  },
+  {
+    path: "M250 100V50C250 44.5 254.5 40 260 40H300",
+    gradientConfig: {
+      initial: { x1: "-40%", x2: "-10%", y1: "0%", y2: "20%" },
+      animate: {
+        x1: ["40%", "0%", "0%"],
+        x2: ["10%", "0%", "0%"],
+        y1: ["0%", "0%", "180%"],
+        y2: ["20%", "20%", "200%"],
+      },
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "loop" as const,
+        ease: "linear",
+        repeatDelay: 2,
+        delay: 0.6,
+      },
+    },
+  },
+];
+
+const ESTIMATE_GRADIENT_COLORS = {
+  start: "#FF4444",
+  middle: "#FF6B6B",
+  end: "#FF4444",
+};
 
 function StarIcon({ className }: { className?: string }) {
   return (
@@ -27,10 +138,14 @@ function SocialProofRow({ className, style }: { className?: string; style?: Reac
       <div className="flex items-center gap-4">
         {/* Stacked avatar circles */}
         <div className="flex -space-x-2.5 shrink-0">
-          <div className="w-8 h-8 rounded-full bg-[#2a2a2a] border-2 border-[#0A0A0A]" />
-          <div className="w-8 h-8 rounded-full bg-[#383838] border-2 border-[#0A0A0A]" />
-          <div className="w-8 h-8 rounded-full bg-[#252525] border-2 border-[#0A0A0A]" />
-          <div className="w-8 h-8 rounded-full bg-[#1e1e1e] border-2 border-[#0A0A0A]" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="" className="w-8 h-8 rounded-full border-2 border-[#0A0A0A] object-cover" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="" className="w-8 h-8 rounded-full border-2 border-[#0A0A0A] object-cover" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="" className="w-8 h-8 rounded-full border-2 border-[#0A0A0A] object-cover" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="" className="w-8 h-8 rounded-full border-2 border-[#0A0A0A] object-cover" />
         </div>
 
         <div>
@@ -53,16 +168,13 @@ function SocialProofRow({ className, style }: { className?: string; style?: Reac
 function AvailableBadge({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
     <div className={className} style={style}>
-      <div className="bg-[#141414]/90 backdrop-blur-sm border border-white/[0.08] rounded-xl px-4 py-3 shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
-        <div className="flex items-center gap-2.5">
+      <div className="bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] rounded-full px-4 py-2.5 shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
+        <div className="flex items-center gap-2">
           <div
             className="w-2 h-2 rounded-full bg-emerald-400 shrink-0"
             style={{ animation: "green-pulse 2s ease-in-out infinite" }}
           />
-          <div>
-            <p className="text-white text-sm font-semibold leading-tight">Available for Projects</p>
-            <p className="text-white/40 text-xs">Taking on 2 new clients this month</p>
-          </div>
+          <p className="text-white text-sm font-medium leading-tight">Available for Projects</p>
         </div>
       </div>
     </div>
@@ -74,7 +186,7 @@ function TickerBar() {
 
   return (
     <div
-      className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/[0.06] overflow-hidden opacity-0"
+      className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/[0.06] overflow-hidden opacity-0 pointer-events-none"
       style={{ animation: "hero-fade-in 0.6s ease-out 1s both" }}
     >
       <div
@@ -96,21 +208,15 @@ function TickerBar() {
 
 export function WorkHero() {
   return (
-    <section className="relative min-h-screen flex items-center px-6 md:px-12 lg:px-24 overflow-hidden">
-      {/* Grid background */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,68,68,0.06) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(255,68,68,0.06) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-          animation: "grid-fade 8s ease-in-out infinite",
-        }}
-      />
+    <section className="relative min-h-screen flex items-center px-6 md:px-12 lg:px-24">
+      {/* Interactive boxes background — no overflow-hidden so grid extends into sections below */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <Boxes />
+      </div>
 
       {/* Top-right red glow */}
       <div
-        className="absolute -top-20 right-0 w-[800px] h-[600px] pointer-events-none"
+        className="absolute -top-20 right-0 w-[800px] h-[600px] pointer-events-none z-[1]"
         style={{
           background:
             "radial-gradient(ellipse 70% 60% at 70% 20%, rgba(255,80,50,0.18) 0%, rgba(255,60,60,0.06) 40%, transparent 70%)",
@@ -118,14 +224,11 @@ export function WorkHero() {
         }}
       />
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent pointer-events-none z-30" />
-
       {/* Scrolling ticker bar */}
       <TickerBar />
 
       {/* ===== Desktop: Two-column layout ===== */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto hidden md:grid md:grid-cols-2 gap-8 items-center min-h-screen py-24">
+      <div className="relative z-10 w-full max-w-7xl mx-auto hidden md:grid md:grid-cols-2 gap-8 items-center min-h-screen py-24 pointer-events-none">
         {/* --- Left column: Text + cards --- */}
         <div className="flex flex-col justify-center">
           {/* Heading — line by line staggered */}
@@ -167,7 +270,7 @@ export function WorkHero() {
             className="flex flex-wrap items-center gap-3 mb-8 opacity-0"
             style={{ animation: "hero-slide-left 0.6s cubic-bezier(0.16,1,0.3,1) 0.75s both" }}
           >
-            <Link href="/contact" className="relative flex items-center gap-3 bg-white/[0.07] backdrop-blur-sm border border-white/[0.1] rounded-2xl px-5 py-3 hover:bg-white/[0.1] transition-colors group">
+            <Link href="/contact" className="pointer-events-auto relative flex items-center gap-3 bg-white/[0.07] backdrop-blur-sm border border-white/[0.1] rounded-2xl px-5 py-3 hover:bg-white/[0.1] transition-colors group">
               {/* FREE ribbon */}
               <div className="absolute -top-2.5 -right-2.5 bg-[#FF4444] text-white text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-[0_2px_12px_rgba(255,68,68,0.4)]">
                 Free
@@ -191,21 +294,33 @@ export function WorkHero() {
               </div>
             </Link>
 
-            <Link
-              href="/estimate"
-              className="relative flex items-center gap-3 bg-[#FF4444] hover:bg-[#E03B3B] rounded-2xl px-5 py-3 transition-colors group"
+            <PulseBeams
+              className="w-auto h-auto overflow-visible inline-flex"
+              beams={ESTIMATE_BEAMS}
+              width={500}
+              height={250}
+              baseColor="rgba(255,255,255,0.08)"
+              accentColor="rgba(255,68,68,0.4)"
+              gradientColors={ESTIMATE_GRADIENT_COLORS}
             >
-              {/* AI sparkle icon */}
-              <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center">
-                <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM19.5 8.25l.75-1.5.75 1.5 1.5.75-1.5.75-.75 1.5-.75-1.5-1.5-.75 1.5-.75z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-white text-sm font-semibold leading-tight">AI Estimate</p>
-                <p className="text-white/70 text-xs">Free & Instant</p>
-              </div>
-            </Link>
+              <Link
+                href="/estimate"
+                className="pointer-events-auto bg-[#141414] no-underline group cursor-pointer relative shadow-2xl shadow-red-950/30 rounded-full p-px font-semibold leading-6 text-white inline-block"
+              >
+                <span className="absolute inset-0 overflow-hidden rounded-full">
+                  <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(255,68,68,0.6)_0%,rgba(255,68,68,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                </span>
+                <div className="relative flex items-center gap-3 z-10 rounded-full bg-[#0A0A0A] px-6 py-3.5 ring-1 ring-white/10">
+                  <svg className="w-5 h-5 text-[#FF4444]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM19.5 8.25l.75-1.5.75 1.5 1.5.75-1.5.75-.75 1.5-.75-1.5-1.5-.75 1.5-.75z" />
+                  </svg>
+                  <div>
+                    <p className="text-sm font-semibold bg-clip-text text-transparent bg-gradient-to-r from-neutral-200 via-white to-neutral-200">AI Estimate</p>
+                    <p className="text-white/50 text-xs">Free & Instant</p>
+                  </div>
+                </div>
+              </Link>
+            </PulseBeams>
           </div>
 
           {/* Social proof row — fades up */}
@@ -235,16 +350,11 @@ export function WorkHero() {
               }}
             />
 
-            {/* Available for Projects badge — top-left of photo */}
-            <AvailableBadge
-              className="absolute top-6 -left-4 lg:left-0 opacity-0"
-              style={{ animation: "hero-scale-in 0.5s cubic-bezier(0.16,1,0.3,1) 0.6s both" }}
-            />
           </div>
 
-          {/* Stats — scales in */}
+          {/* Stats + Available badge — scales in */}
           <div
-            className="absolute -right-4 lg:right-0 bottom-[20%] opacity-0"
+            className="absolute -right-4 lg:right-0 bottom-[20%] opacity-0 flex flex-col items-end gap-3"
             style={{ animation: "hero-scale-in 0.5s cubic-bezier(0.16,1,0.3,1) 1.1s both" }}
           >
             <div className="flex items-start gap-5 bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] rounded-2xl px-6 py-5">
@@ -258,12 +368,13 @@ export function WorkHero() {
                 <p className="text-white/40 text-xs mt-1">AI Uptime</p>
               </div>
             </div>
+            <AvailableBadge />
           </div>
         </div>
       </div>
 
       {/* ===== Mobile layout ===== */}
-      <div className="relative z-10 md:hidden w-full pt-28 pb-10">
+      <div className="relative z-10 md:hidden w-full pt-28 pb-10 pointer-events-none">
         <h1 className="text-3xl font-bold tracking-tight leading-[1.1] mb-4">
           <span
             className="block opacity-0"
@@ -315,11 +426,14 @@ export function WorkHero() {
             }}
           />
 
-          {/* Available for Projects badge — top-right on mobile */}
-          <AvailableBadge
-            className="absolute top-4 right-2 opacity-0"
-            style={{ animation: "hero-scale-in 0.5s cubic-bezier(0.16,1,0.3,1) 0.7s both" }}
-          />
+        </div>
+
+        {/* Available badge — below photo on mobile */}
+        <div
+          className="flex justify-center mb-4 opacity-0"
+          style={{ animation: "hero-scale-in 0.5s cubic-bezier(0.16,1,0.3,1) 0.7s both" }}
+        >
+          <AvailableBadge />
         </div>
 
         {/* Social proof row — fades up */}
@@ -335,18 +449,25 @@ export function WorkHero() {
         >
           <Link
             href="/contact"
-            className="inline-block px-8 py-3.5 bg-white/[0.07] backdrop-blur-sm border border-white/[0.1] text-white font-medium rounded-full hover:bg-white/[0.1] transition-colors text-base text-center"
+            className="pointer-events-auto inline-block px-8 py-3.5 bg-white/[0.07] backdrop-blur-sm border border-white/[0.1] text-white font-medium rounded-full hover:bg-white/[0.1] transition-colors text-base text-center"
           >
             Book a Free Consultation
           </Link>
           <Link
             href="/estimate"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#FF4444] text-white font-medium rounded-full hover:bg-[#E03B3B] transition-colors text-base"
+            className="pointer-events-auto bg-[#141414] no-underline group cursor-pointer relative shadow-2xl shadow-red-950/30 rounded-full p-px font-semibold leading-6 text-white inline-block"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
-            </svg>
-            Get Your Free AI Estimate
+            <span className="absolute inset-0 overflow-hidden rounded-full">
+              <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(255,68,68,0.6)_0%,rgba(255,68,68,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            </span>
+            <div className="relative flex items-center justify-center gap-2 z-10 rounded-full bg-[#0A0A0A] px-8 py-3.5 ring-1 ring-white/10">
+              <svg className="w-4 h-4 text-[#FF4444]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+              </svg>
+              <span className="text-base font-medium bg-clip-text text-transparent bg-gradient-to-r from-neutral-200 via-white to-neutral-200">
+                Get Your Free AI Estimate
+              </span>
+            </div>
           </Link>
         </div>
       </div>

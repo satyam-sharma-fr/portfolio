@@ -1,9 +1,9 @@
 import { EstimateWizard } from "@/components/estimate/EstimateWizard";
 
 export const metadata = {
-  title: "Free AI Project Estimate | Satyam — AI Automation Engineer",
+  title: "Free Project Estimate | Satyam — AI Automation Engineer",
   description:
-    "Get an instant, AI-powered estimate for your software project. Answer a few questions and receive a detailed time and cost breakdown — completely free.",
+    "Get an instant, AI-powered estimate for your project. Answer a few quick questions and receive a detailed time and cost breakdown — completely free.",
 };
 
 export default function EstimatePage() {

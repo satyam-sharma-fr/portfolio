@@ -1,16 +1,7 @@
-import { openai } from "@ai-sdk/openai";
-import { generateText } from "ai";
-
 export const maxDuration = 30;
 
-const SYSTEM_PROMPT = `You are an AI voice receptionist for a medical clinic called "HealthFirst Clinic". You handle:
-- Appointment booking and rescheduling
-- General inquiries about services and hours
-- Routing urgent calls to the right department
-
-Keep responses very brief (1-2 sentences) since this is a voice conversation.
-Be warm, professional, and efficient. Always confirm key details.
-This is a demo on a portfolio site showcasing AI voice agent capabilities.`;
+const N8N_WEBHOOK_URL =
+  "https://n8n.srv708090.hstgr.cloud/webhook/46fdc4e7-9939-473d-9ef2-0f3e97a33920";
 
 export async function POST(req: Request) {
   const formData = await req.formData();
@@ -20,86 +11,50 @@ export async function POST(req: Request) {
     return Response.json({ error: "No audio provided" }, { status: 400 });
   }
 
-  // Step 1: Transcribe audio with Whisper via fetch
-  const transcriptionForm = new FormData();
-  transcriptionForm.append(
+  // Forward the audio to n8n webhook
+  const n8nForm = new FormData();
+  n8nForm.append(
     "file",
     new File([audioBlob], "audio.webm", { type: "audio/webm" })
   );
-  transcriptionForm.append("model", "whisper-1");
 
-  const transcriptionRes = await fetch(
-    "https://api.openai.com/v1/audio/transcriptions",
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-      },
-      body: transcriptionForm,
-    }
-  );
+  const response = await fetch(N8N_WEBHOOK_URL, {
+    method: "POST",
+    body: n8nForm,
+  });
 
-  if (!transcriptionRes.ok) {
+  if (!response.ok) {
+    console.error("n8n voice webhook error:", response.status);
     return Response.json(
-      { error: "Failed to transcribe audio" },
+      { error: "Failed to process audio" },
       { status: 500 }
     );
   }
 
-  const { text: userText } = await transcriptionRes.json();
+  const contentType = response.headers.get("content-type") || "";
 
-  if (!userText || userText.trim().length === 0) {
-    return Response.json(
-      { error: "Could not transcribe audio" },
-      { status: 400 }
-    );
+  // n8n returns audio directly — forward the binary to the client
+  if (contentType.includes("audio/")) {
+    const audioBuffer = await response.arrayBuffer();
+    return new Response(audioBuffer, {
+      headers: { "Content-Type": contentType },
+    });
   }
 
-  // Step 2: Get AI response
-  const messagesRaw = formData.get("messages");
-  const previousMessages = messagesRaw
-    ? JSON.parse(messagesRaw as string)
-    : [];
-
-  const conversationMessages = [
-    ...previousMessages,
-    { role: "user" as const, content: userText },
-  ];
-
-  const { text: aiResponse } = await generateText({
-    model: openai("gpt-4o-mini"),
-    system: SYSTEM_PROMPT,
-    messages: conversationMessages,
-    maxOutputTokens: 150,
-  });
-
-  // Step 3: Generate speech from AI response via fetch
-  const ttsRes = await fetch("https://api.openai.com/v1/audio/speech", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "tts-1",
-      voice: "nova",
-      input: aiResponse,
-      response_format: "mp3",
-    }),
-  });
-
-  if (!ttsRes.ok) {
-    // Return text response even if TTS fails
-    return Response.json({ userText, aiResponse, audioBase64: null });
+  // n8n returns JSON — normalise and forward
+  if (contentType.includes("application/json")) {
+    const data = await response.json();
+    return Response.json({
+      userText: data.userText || data.transcription || null,
+      aiResponse:
+        data.aiResponse || data.output || data.text || data.message || null,
+      audioBase64: data.audioBase64 || data.audio || null,
+      audioUrl: data.audioUrl || null,
+    });
   }
 
-  const audioBuffer = await ttsRes.arrayBuffer();
+  // Fallback: treat as binary audio (some webhooks omit content-type)
+  const audioBuffer = await response.arrayBuffer();
   const audioBase64 = Buffer.from(audioBuffer).toString("base64");
-
-  return Response.json({
-    userText,
-    aiResponse,
-    audioBase64,
-    audioFormat: "mp3",
-  });
+  return Response.json({ userText: null, aiResponse: null, audioBase64 });
 }

@@ -17,9 +17,14 @@ export default function WorkPage() {
   return (
     <main className="bg-[#0A0A0A] text-white min-h-screen">
       <SideNav />
-      <WorkHero />
-      <Introduction />
-      <Services />
+
+      {/* Boxes live inside WorkHero but overflow into intro & services */}
+      <div className="overflow-x-hidden">
+        <WorkHero />
+        <Introduction />
+        <Services />
+      </div>
+
       <Process />
       <Projects />
       <Tools />
