@@ -2,14 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useRef } from "react";
 import { DM_Sans } from "next/font/google";
 import { ArrowRight } from "lucide-react";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 import {
   siAnthropic,
   siLangchain,
   siHuggingface,
   siOllama,
+  siGooglegemini,
+  siMeta,
   siPython,
   siTypescript,
   siNextdotjs,
@@ -23,10 +27,18 @@ import {
   siSupabase,
   siMongodb,
   siRedis,
+  siMistralai,
+  siMilvus,
+  siElasticsearch,
   siDocker,
   siVercel,
+  siGithub,
   siGooglecloud,
   siCloudflare,
+  siNotion,
+  siAirtable,
+  siHubspot,
+  siStripe,
 } from "simple-icons";
 import {
   profile,
@@ -55,9 +67,12 @@ const DARK_HEXES = new Set(["000000", "181717", "191919", "1C3C3C", "111111"]);
 const techIconMap: Record<string, TechIcon> = {
   OpenAI: { name: "OpenAI", path: OPENAI_PATH, hex: "412991" },
   Anthropic: { name: siAnthropic.title, path: siAnthropic.path, hex: siAnthropic.hex },
+  "Google Gemini": { name: siGooglegemini.title, path: siGooglegemini.path, hex: siGooglegemini.hex },
+  Meta: { name: siMeta.title, path: siMeta.path, hex: siMeta.hex },
   LangChain: { name: siLangchain.title, path: siLangchain.path, hex: siLangchain.hex },
   "Hugging Face": { name: siHuggingface.title, path: siHuggingface.path, hex: siHuggingface.hex },
   Ollama: { name: siOllama.title, path: siOllama.path, hex: siOllama.hex },
+  "Mistral AI": { name: siMistralai.title, path: siMistralai.path, hex: siMistralai.hex },
   Python: { name: siPython.title, path: siPython.path, hex: siPython.hex },
   TypeScript: { name: siTypescript.title, path: siTypescript.path, hex: siTypescript.hex },
   "Next.js": { name: siNextdotjs.title, path: siNextdotjs.path, hex: siNextdotjs.hex },
@@ -71,10 +86,17 @@ const techIconMap: Record<string, TechIcon> = {
   Supabase: { name: siSupabase.title, path: siSupabase.path, hex: siSupabase.hex },
   MongoDB: { name: siMongodb.title, path: siMongodb.path, hex: siMongodb.hex },
   Redis: { name: siRedis.title, path: siRedis.path, hex: siRedis.hex },
+  Milvus: { name: siMilvus.title, path: siMilvus.path, hex: siMilvus.hex },
+  Elasticsearch: { name: siElasticsearch.title, path: siElasticsearch.path, hex: siElasticsearch.hex },
   Docker: { name: siDocker.title, path: siDocker.path, hex: siDocker.hex },
   Vercel: { name: siVercel.title, path: siVercel.path, hex: siVercel.hex },
+  GitHub: { name: siGithub.title, path: siGithub.path, hex: siGithub.hex },
   "Google Cloud": { name: siGooglecloud.title, path: siGooglecloud.path, hex: siGooglecloud.hex },
   Cloudflare: { name: siCloudflare.title, path: siCloudflare.path, hex: siCloudflare.hex },
+  Notion: { name: siNotion.title, path: siNotion.path, hex: siNotion.hex },
+  Airtable: { name: siAirtable.title, path: siAirtable.path, hex: siAirtable.hex },
+  HubSpot: { name: siHubspot.title, path: siHubspot.path, hex: siHubspot.hex },
+  Stripe: { name: siStripe.title, path: siStripe.path, hex: siStripe.hex },
 };
 
 function brandColor(hex: string) {
@@ -95,6 +117,154 @@ function Tag({ children }: { children: React.ReactNode }) {
     <span className="inline-block px-3 py-1.5 text-[14px] font-medium text-neutral-700 bg-neutral-100 border border-neutral-200 rounded-md">
       {children}
     </span>
+  );
+}
+
+function TimelineDot({ isFirst }: { isFirst: boolean }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { margin: "-40% 0px -40% 0px" });
+
+  return (
+    <div ref={ref} className="absolute left-0 top-2 w-[12px] h-[12px] z-10">
+      {/* Pulse ring — only when in view */}
+      {isInView && (
+        <motion.div
+          className="absolute inset-0 rounded-full bg-neutral-900/20"
+          initial={{ scale: 1, opacity: 0.5 }}
+          animate={{ scale: 2.5, opacity: 0 }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" as const }}
+        />
+      )}
+      {/* Dot */}
+      <motion.div
+        className="absolute inset-0 rounded-full border-2"
+        animate={
+          isInView || isFirst
+            ? { backgroundColor: "#171717", borderColor: "#171717", scale: 1.15 }
+            : { backgroundColor: "#ffffff", borderColor: "#d4d4d4", scale: 1 }
+        }
+        transition={{ duration: 0.4, ease: "easeOut" as const }}
+      />
+    </div>
+  );
+}
+
+function TimelineCard({ children, index }: { children: React.ReactNode; index: number }) {
+  return (
+    <motion.div
+      className="relative pl-11 mb-14 last:mb-0"
+      initial={{ opacity: 0, x: -24 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-10% 0px" }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" as const }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function ExperienceTimeline() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 80%", "end 40%"],
+  });
+  const lineScaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  return (
+    <motion.section
+      className="mb-20"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      <SectionHeading>Experience Highlights</SectionHeading>
+
+      <div ref={containerRef} className="relative">
+        {/* Background timeline line (grey) */}
+        <div className="absolute left-[5px] top-3 bottom-3 w-[2px] bg-neutral-200 rounded-full" />
+        {/* Scroll-driven progress line (dark) */}
+        <motion.div
+          className="absolute left-[5px] top-3 bottom-3 w-[2px] bg-neutral-900 rounded-full origin-top"
+          style={{ scaleY: lineScaleY }}
+        />
+
+        <div>
+          {experience.map((job, i) => (
+            <TimelineCard key={`${job.company}-${job.dates}`} index={i}>
+              <TimelineDot isFirst={i === 0} />
+
+              {/* Title + dates */}
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+                <h3 className="text-[20px] font-bold text-neutral-900 leading-snug">
+                  {job.title}
+                </h3>
+                <span className="text-[12px] text-neutral-400 font-mono flex-shrink-0">
+                  {job.dates}
+                </span>
+              </div>
+
+              {/* Company */}
+              <p className="text-[14px] text-neutral-400 mb-4">
+                {job.company}
+              </p>
+
+              {/* Overview */}
+              <p className="text-[10px] uppercase tracking-[0.15em] text-neutral-300 font-semibold mb-1.5">
+                Overview
+              </p>
+              <p className="text-[15px] text-neutral-600 mb-3" style={{ lineHeight: 1.65 }}>
+                {job.overview}
+              </p>
+
+              {/* Domain tags */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {job.domains.map((d) => (
+                  <span
+                    key={d}
+                    className="inline-block text-[11px] px-2 py-0.5 rounded bg-neutral-100 border border-neutral-200 text-neutral-500"
+                  >
+                    {d}
+                  </span>
+                ))}
+              </div>
+
+              {/* Responsibilities */}
+              <p className="text-[10px] uppercase tracking-[0.15em] text-neutral-300 font-semibold mb-2">
+                Responsibilities
+              </p>
+              <ul className="space-y-1.5 mb-4">
+                {job.responsibilities.map((r) => (
+                  <li
+                    key={r}
+                    className="text-[15px] text-neutral-600 pl-4 relative before:content-['·'] before:absolute before:left-0 before:text-neutral-300 before:font-bold"
+                    style={{ lineHeight: 1.6 }}
+                  >
+                    {r}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Tech stack */}
+              <p className="text-[10px] uppercase tracking-[0.15em] text-neutral-300 font-semibold mb-1.5">
+                Tech
+              </p>
+              <div className="flex flex-wrap gap-1">
+                {job.techStack.slice(0, MAX_TECH_PER_ROLE).map((t) => (
+                  <span
+                    key={t}
+                    className="text-[10px] px-2 py-0.5 rounded bg-neutral-50 border border-neutral-100 text-neutral-400"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </TimelineCard>
+          ))}
+        </div>
+      </div>
+    </motion.section>
   );
 }
 
@@ -376,101 +546,7 @@ export function ResumeView() {
             </motion.section>
 
             {/* Experience Highlights */}
-            <motion.section
-              className="mb-20"
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={6}
-            >
-              <SectionHeading>Experience Highlights</SectionHeading>
-
-              <div className="relative">
-                {/* Vertical timeline line */}
-                <div className="absolute left-[5px] top-3 bottom-3 w-[2px] bg-neutral-200 rounded-full" />
-
-                <div>
-                  {experience.map((job, i) => (
-                    <div key={`${job.company}-${job.dates}`} className="relative pl-11 mb-14 last:mb-0">
-                      {/* Timeline dot — filled for current role, outlined for past */}
-                      <div
-                        className={`absolute left-0 top-2 w-[12px] h-[12px] rounded-full z-10 ${
-                          i === 0
-                            ? "bg-neutral-900 border-2 border-neutral-900"
-                            : "bg-white border-[2.5px] border-neutral-300"
-                        }`}
-                      />
-
-                      {/* Title + dates */}
-                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
-                        <h3 className="text-[20px] font-bold text-neutral-900 leading-snug">
-                          {job.title}
-                        </h3>
-                        <span className="text-[12px] text-neutral-400 font-mono flex-shrink-0">
-                          {job.dates}
-                        </span>
-                      </div>
-
-                      {/* Company */}
-                      <p className="text-[14px] text-neutral-400 mb-4">
-                        {job.company}
-                      </p>
-
-                      {/* Overview label — lighter, smaller */}
-                      <p className="text-[10px] uppercase tracking-[0.15em] text-neutral-300 font-semibold mb-1.5">
-                        Overview
-                      </p>
-                      <p className="text-[15px] text-neutral-600 mb-3" style={{ lineHeight: 1.65 }}>
-                        {job.overview}
-                      </p>
-
-                      {/* Domain tags */}
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {job.domains.map((d) => (
-                          <span
-                            key={d}
-                            className="inline-block text-[11px] px-2 py-0.5 rounded bg-neutral-100 border border-neutral-200 text-neutral-500"
-                          >
-                            {d}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Responsibilities label — lighter */}
-                      <p className="text-[10px] uppercase tracking-[0.15em] text-neutral-300 font-semibold mb-2">
-                        Responsibilities
-                      </p>
-                      <ul className="space-y-1.5 mb-4">
-                        {job.responsibilities.map((r) => (
-                          <li
-                            key={r}
-                            className="text-[15px] text-neutral-600 pl-4 relative before:content-['·'] before:absolute before:left-0 before:text-neutral-300 before:font-bold"
-                            style={{ lineHeight: 1.6 }}
-                          >
-                            {r}
-                          </li>
-                        ))}
-                      </ul>
-
-                      {/* Tech stack — capped, smaller, faded */}
-                      <p className="text-[10px] uppercase tracking-[0.15em] text-neutral-300 font-semibold mb-1.5">
-                        Tech
-                      </p>
-                      <div className="flex flex-wrap gap-1">
-                        {job.techStack.slice(0, MAX_TECH_PER_ROLE).map((t) => (
-                          <span
-                            key={t}
-                            className="text-[10px] px-2 py-0.5 rounded bg-neutral-50 border border-neutral-100 text-neutral-400"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.section>
+            <ExperienceTimeline />
 
             {/* Footer CTA — white card, cohesive */}
             <motion.section
@@ -489,12 +565,18 @@ export function ResumeView() {
                       From idea to production — I ship fast and iterate with you every step of the way.
                     </p>
                   </div>
-                  <Link
-                    href="/contact"
-                    className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-xl bg-neutral-900 text-white font-bold text-[15px] hover:bg-neutral-800 transition-colors flex-shrink-0"
-                  >
-                    Book a Call
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <Link href="/contact" className="flex-shrink-0">
+                    <RainbowButton
+                      className="inline-flex items-center gap-3 px-7 py-3.5 font-bold text-[15px]"
+                      style={{
+                        background: "linear-gradient(#171717,#171717), linear-gradient(#171717 50%, rgba(23,23,23,0.6) 80%, rgba(23,23,23,0)), linear-gradient(90deg, hsl(var(--color-1)), hsl(var(--color-5)), hsl(var(--color-3)), hsl(var(--color-4)), hsl(var(--color-2)))",
+                        backgroundSize: "200%",
+                        color: "#fff",
+                      }}
+                    >
+                      Book a Call
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </RainbowButton>
                   </Link>
                 </div>
               </div>

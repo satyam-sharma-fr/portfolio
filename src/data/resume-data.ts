@@ -28,15 +28,15 @@ export const domainExpertise = [
 export const technologyCategories = [
   {
     label: "AI & LLMs",
-    tools: ["OpenAI", "Anthropic", "LangChain", "Hugging Face", "Ollama"],
+    tools: ["OpenAI", "Anthropic", "Google Gemini", "Meta", "Hugging Face", "Ollama", "Mistral AI", "LangChain"],
   },
   {
     label: "Automation & Data",
-    tools: ["n8n", "Zapier", "Make", "PostgreSQL", "Supabase", "MongoDB", "Redis", "Pinecone"],
+    tools: ["n8n", "Zapier", "Make", "PostgreSQL", "Supabase", "MongoDB", "Redis", "Milvus", "Elasticsearch"],
   },
   {
-    label: "Stack & Infra",
-    tools: ["Python", "TypeScript", "Next.js", "React", "Node.js", "FastAPI", "Docker", "Vercel", "Google Cloud", "Cloudflare"],
+    label: "Stack & Integrations",
+    tools: ["Python", "TypeScript", "Next.js", "React", "Node.js", "FastAPI", "Vercel", "Docker", "GitHub", "Google Cloud", "Cloudflare", "Notion", "Airtable", "HubSpot", "Stripe"],
   },
 ];
 
